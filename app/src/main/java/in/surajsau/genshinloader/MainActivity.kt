@@ -15,8 +15,10 @@ import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
 import `in`.surajsau.genshinloader.genshin.GenshinLoader
 import `in`.surajsau.genshinloader.simple.GenshinSimpleLoader
+import `in`.surajsau.genshinloader.ticker.Ticker
 import `in`.surajsau.genshinloader.ui.MyApplicationTheme
 import androidx.compose.foundation.Text
+import androidx.compose.material.Button
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +33,9 @@ class MainActivity : AppCompatActivity() {
 
 @Composable
 fun mainActivity() {
+    Column(modifier = Modifier.fillMaxSize()) {
 
+    }
 }
 
 @Preview(showBackground = true)
