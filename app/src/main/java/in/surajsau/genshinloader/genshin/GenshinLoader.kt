@@ -1,10 +1,8 @@
-package `in`.surajsau.genshinloader.icon
+package `in`.surajsau.genshinloader.genshin
 
 import androidx.annotation.FloatRange
 import androidx.compose.foundation.layout.Row
-import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview

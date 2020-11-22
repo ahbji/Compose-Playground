@@ -1,4 +1,4 @@
-package `in`.surajsau.genshinloader.icon
+package `in`.surajsau.genshinloader.genshin
 
 import `in`.surajsau.genshinloader.ui.defaultIconColor
 import `in`.surajsau.genshinloader.ui.progressIconColor
@@ -6,7 +6,6 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
