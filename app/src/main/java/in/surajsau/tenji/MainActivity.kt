@@ -1,24 +1,19 @@
 package `in`.surajsau.tenji
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Slider
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.setContent
-import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
-import `in`.surajsau.tenji.genshin.GenshinLoader
-import `in`.surajsau.tenji.simple.GenshinSimpleLoader
 import `in`.surajsau.tenji.ticker.Ticker
+import `in`.surajsau.tenji.ticker.currentTickerValue
 import `in`.surajsau.tenji.ui.MyApplicationTheme
-import androidx.compose.foundation.Text
-import androidx.compose.material.Button
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.transitionDefinition
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.transition
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,8 +28,25 @@ class MainActivity : AppCompatActivity() {
 
 @Composable
 fun mainActivity() {
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(modifier = Modifier.fillMaxWidth()) {
 
+        Ticker(
+                state = transition(
+                        definition = transitionDefinition {
+                            state(0) { this[currentTickerValue] = 0f }
+                            state(1) { this[currentTickerValue] = 50f }
+
+                            transition(0 to 1) {
+                                currentTickerValue using tween(
+                                        durationMillis = 10 * 1_000,
+                                        easing = LinearEasing
+                                )
+                            }
+                        },
+                        initState = 0,
+                        toState = 1
+                )
+        )
     }
 }
 
