@@ -1,4 +1,4 @@
-package `in`.surajsau.genshinloader.genshin
+package `in`.surajsau.tenji.genshin
 
 import androidx.annotation.FloatRange
 import androidx.compose.foundation.layout.Row

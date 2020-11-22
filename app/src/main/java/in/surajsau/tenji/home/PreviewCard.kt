@@ -1,4 +1,4 @@
-package `in`.surajsau.genshinloader.home
+package `in`.surajsau.tenji.home
 
 import androidx.compose.runtime.Composable
 

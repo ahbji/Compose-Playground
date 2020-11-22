@@ -1,8 +1,8 @@
-package `in`.surajsau.genshinloader.ticker
+package `in`.surajsau.tenji.ticker
 
-import `in`.surajsau.genshinloader.androidx.Progress
-import `in`.surajsau.genshinloader.androidx.ValueAnimator
-import `in`.surajsau.genshinloader.androidx.animationProgress
+import `in`.surajsau.tenji.androidx.Progress
+import `in`.surajsau.tenji.androidx.ValueAnimator
+import `in`.surajsau.tenji.androidx.animationProgress
 import androidx.compose.animation.core.TransitionState
 import androidx.compose.animation.transition
 import androidx.compose.foundation.layout.Box

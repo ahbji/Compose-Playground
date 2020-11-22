@@ -1,4 +1,4 @@
-package `in`.surajsau.genshinloader
+package `in`.surajsau.tenji
 
 import android.os.Bundle
 import android.util.Log
@@ -13,10 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
-import `in`.surajsau.genshinloader.genshin.GenshinLoader
-import `in`.surajsau.genshinloader.simple.GenshinSimpleLoader
-import `in`.surajsau.genshinloader.ticker.Ticker
-import `in`.surajsau.genshinloader.ui.MyApplicationTheme
+import `in`.surajsau.tenji.genshin.GenshinLoader
+import `in`.surajsau.tenji.simple.GenshinSimpleLoader
+import `in`.surajsau.tenji.ticker.Ticker
+import `in`.surajsau.tenji.ui.MyApplicationTheme
 import androidx.compose.foundation.Text
 import androidx.compose.material.Button
 

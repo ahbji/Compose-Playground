@@ -1,4 +1,4 @@
-package `in`.surajsau.genshinloader.androidx
+package `in`.surajsau.tenji.androidx
 
 import androidx.compose.animation.core.FloatPropKey
 import androidx.compose.animation.core.TransitionDefinition

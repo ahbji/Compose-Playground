@@ -1,7 +1,7 @@
-package `in`.surajsau.genshinloader.simple
+package `in`.surajsau.tenji.simple
 
-import `in`.surajsau.genshinloader.ui.defaultIconColor
-import `in`.surajsau.genshinloader.ui.progressIconColor
+import `in`.surajsau.tenji.ui.defaultIconColor
+import `in`.surajsau.tenji.ui.progressIconColor
 import androidx.annotation.FloatRange
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

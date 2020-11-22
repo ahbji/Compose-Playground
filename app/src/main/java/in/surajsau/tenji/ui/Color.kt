@@ -1,4 +1,4 @@
-package `in`.surajsau.genshinloader.ui
+package `in`.surajsau.tenji.ui
 
 import androidx.compose.ui.graphics.Color
 

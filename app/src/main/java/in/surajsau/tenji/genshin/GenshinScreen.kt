@@ -1,7 +1,7 @@
-package `in`.surajsau.genshinloader.genshin
+package `in`.surajsau.tenji.genshin
 
-import `in`.surajsau.genshinloader.simple.GenshinSimpleLoader
-import `in`.surajsau.genshinloader.ui.MyApplicationTheme
+import `in`.surajsau.tenji.simple.GenshinSimpleLoader
+import `in`.surajsau.tenji.ui.MyApplicationTheme
 import android.util.Log
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.*

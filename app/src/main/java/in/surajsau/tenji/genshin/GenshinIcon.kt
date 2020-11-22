@@ -1,7 +1,7 @@
-package `in`.surajsau.genshinloader.genshin
+package `in`.surajsau.tenji.genshin
 
-import `in`.surajsau.genshinloader.ui.defaultIconColor
-import `in`.surajsau.genshinloader.ui.progressIconColor
+import `in`.surajsau.tenji.ui.defaultIconColor
+import `in`.surajsau.tenji.ui.progressIconColor
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
