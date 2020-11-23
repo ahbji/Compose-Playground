@@ -1,5 +1,7 @@
 package `in`.surajsau.tenji
 
+import `in`.surajsau.tenji.neomorph.NeomorphButton
+import `in`.surajsau.tenji.neomorph.NeomorphColor
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.*
@@ -14,6 +16,7 @@ import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.transitionDefinition
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.transition
+import androidx.compose.foundation.background
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,8 +31,10 @@ class MainActivity : AppCompatActivity() {
 
 @Composable
 fun mainActivity() {
-    Column(modifier = Modifier.fillMaxWidth()) {
-
+    Column(modifier = Modifier.fillMaxSize().background(
+            color = NeomorphColor
+    )) {
+        NeomorphButton()
     }
 }
 
