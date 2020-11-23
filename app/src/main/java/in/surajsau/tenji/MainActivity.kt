@@ -30,23 +30,6 @@ class MainActivity : AppCompatActivity() {
 fun mainActivity() {
     Column(modifier = Modifier.fillMaxWidth()) {
 
-        Ticker(
-                state = transition(
-                        definition = transitionDefinition {
-                            state(0) { this[currentTickerValue] = 0f }
-                            state(1) { this[currentTickerValue] = 50f }
-
-                            transition(0 to 1) {
-                                currentTickerValue using tween(
-                                        durationMillis = 10 * 1_000,
-                                        easing = LinearEasing
-                                )
-                            }
-                        },
-                        initState = 0,
-                        toState = 1
-                )
-        )
     }
 }
 

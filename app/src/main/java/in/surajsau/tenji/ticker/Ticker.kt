@@ -6,7 +6,12 @@ import `in`.surajsau.tenji.androidx.animationProgress
 import android.util.Log
 import androidx.compose.animation.core.FloatPropKey
 import androidx.compose.animation.core.IntPropKey
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.TransitionState
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.transitionDefinition
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.transition
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.offset
@@ -20,14 +25,38 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.Preview
+import kotlin.time.DurationUnit
 
 val currentTickerValue = FloatPropKey()
 
 @Composable
 fun Ticker(
-        state: TransitionState,
+        from: Int,
+        to: Int
 ) {
-    Log.e("Ticker", "${state[currentTickerValue]}")
+    _Ticker(
+            state = transition(
+                    definition = transitionDefinition {
+                        state(0) { this[currentTickerValue] = from.toFloat() }
+                        state(1) { this[currentTickerValue] = to.toFloat() }
+
+                        transition(0 to 1) {
+                            currentTickerValue using tween(
+                                    durationMillis = (to - from) * 3_00,
+                                    easing = LinearEasing
+                            )
+                        }
+                    },
+                    initState = 0,
+                    toState = 1
+            )
+    )
+}
+
+@Composable
+private fun _Ticker(
+        state: TransitionState
+) {
     val toString = "${state[currentTickerValue].toInt()}"
     val delta = state[currentTickerValue] - state[currentTickerValue].toInt()
     val numberOfDigits = toString.length
@@ -68,10 +97,8 @@ fun Ticker(
 @Preview
 @Composable
 fun PreviewTicker() {
-    val transition = transition(
-            definition = ValueAnimator.definition(),
-            toState = Progress.END,
-            initState = Progress.START
+    Ticker(
+            from = 0,
+            to = 5
     )
-    Ticker(state = transition)
 }
