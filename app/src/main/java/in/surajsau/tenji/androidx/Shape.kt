@@ -25,9 +25,9 @@ fun Shape(
         brush: Brush,
         modifier: Modifier = Modifier
 ){
-    Column(modifier = Modifier.wrapContentSize(Alignment.Center)) {
+    Column(modifier = modifier.wrapContentSize(Alignment.Center)) {
         Box(
-                modifier = modifier
+                modifier = Modifier
                         .preferredSize(
                                 width = size.width,
                                 height = size.height
@@ -87,7 +87,7 @@ fun PreviewShape() {
 
         Circle(
                 radius = 60.dp,
-                color = Color.Red
+                color = Color.White
         )
     }
 }

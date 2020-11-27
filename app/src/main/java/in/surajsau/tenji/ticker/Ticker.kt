@@ -32,9 +32,10 @@ val currentTickerValue = FloatPropKey()
 @Composable
 fun Ticker(
         from: Int,
-        to: Int
+        to: Int,
+        modifier: Modifier = Modifier
 ) {
-    _Ticker(
+    TickerView(
             state = transition(
                     definition = transitionDefinition {
                         state(0) { this[currentTickerValue] = from.toFloat() }
@@ -49,18 +50,20 @@ fun Ticker(
                     },
                     initState = 0,
                     toState = 1
-            )
+            ),
+            modifier = modifier
     )
 }
 
 @Composable
-private fun _Ticker(
-        state: TransitionState
+private fun TickerView(
+        state: TransitionState,
+        modifier: Modifier = Modifier
 ) {
     val toString = "${state[currentTickerValue].toInt()}"
     val delta = state[currentTickerValue] - state[currentTickerValue].toInt()
     val numberOfDigits = toString.length
-    Box(modifier = Modifier.size(
+    Box(modifier = modifier.size(
             width = (numberOfDigits * 30).dp,
             height = 50.dp
         )
