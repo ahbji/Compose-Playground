@@ -1,9 +1,11 @@
 package `in`.surajsau.tenji.home
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
 
@@ -17,9 +19,10 @@ fun ItemCard(item: Item) {
                 topRight = 8.dp.value,
                 bottomLeft = 8.dp.value,
                 bottomRight = 8.dp.value
-            )
+            ),
     ) {
-        Text(text = item.title)
+        Text(text = item.title,
+            modifier = Modifier.padding(all = 16.dp))
     }
 }
 

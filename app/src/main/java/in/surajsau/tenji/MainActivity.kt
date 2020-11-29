@@ -4,6 +4,7 @@ import `in`.surajsau.tenji.neomorph.ButtonState
 import `in`.surajsau.tenji.neomorph.NeomorphButton
 import `in`.surajsau.tenji.neomorph.NeomorphColor
 import `in`.surajsau.tenji.neomorph.buttonStateProgress
+import `in`.surajsau.tenji.ticker.SlotMachine
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.*
@@ -35,33 +36,7 @@ class MainActivity : AppCompatActivity() {
 
 @Composable
 fun mainActivity() {
-    Column(modifier = Modifier.fillMaxSize().background(
-            color = NeomorphColor
-    )) {
-        val buttonState = remember { mutableStateOf(ButtonState.IDLE) }
-        val toState = if (buttonState.value == ButtonState.IDLE) {
-            ButtonState.PRESSED
-        } else {
-            ButtonState.IDLE
-        }
-        val state = transition(
-                definition = transitionDefinition {
-                    state(ButtonState.IDLE) { this[buttonStateProgress] = 0f }
-                    state(ButtonState.PRESSED) { this[buttonStateProgress] = 1f }
-
-                    transition(ButtonState.IDLE to ButtonState.PRESSED) {
-                        buttonStateProgress using tween()
-                    }
-
-                    transition(ButtonState.PRESSED to ButtonState.IDLE) {
-                        buttonStateProgress using tween()
-                    }
-                },
-                initState = buttonState.value,
-                toState = toState
-        )
-        NeomorphButton(state = state, buttonState = buttonState)
-    }
+    SlotMachine()
 }
 
 @Preview(showBackground = true)

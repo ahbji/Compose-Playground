@@ -25,6 +25,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.Preview
+import kotlin.math.abs
 import kotlin.time.DurationUnit
 
 val currentTickerValue = FloatPropKey()
@@ -33,7 +34,8 @@ val currentTickerValue = FloatPropKey()
 fun Ticker(
         from: Int,
         to: Int,
-        modifier: Modifier = Modifier
+        modifier: Modifier = Modifier,
+        onStateChangeFinished: (() -> Unit)? = null
 ) {
     TickerView(
             state = transition(
@@ -43,13 +45,16 @@ fun Ticker(
 
                         transition(0 to 1) {
                             currentTickerValue using tween(
-                                    durationMillis = (to - from) * 3_00,
+                                    durationMillis = abs(to - from) * 3_00,
                                     easing = LinearEasing
                             )
                         }
                     },
                     initState = 0,
-                    toState = 1
+                    toState = 1,
+                    onStateChangeFinished = {
+                        onStateChangeFinished?.invoke()
+                    }
             ),
             modifier = modifier
     )
