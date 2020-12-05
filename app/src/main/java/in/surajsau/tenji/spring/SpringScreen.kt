@@ -65,8 +65,6 @@ fun SpringScreen() {
                     )
             )
 
-            Log.e("Spring", "dy: ${dy.value}, height: ${height.value}")
-
             Box(
                     modifier = Modifier
                             .fillMaxWidth()
@@ -81,7 +79,7 @@ fun SpringScreen() {
                                 }
 
                                 override fun onDrag(dragDistance: Offset): Offset {
-                                    dy.value += abs(dragDistance.y * 0.1f).dp
+                                    dy.value += (dragDistance.y * 0.1f).dp
                                     isDragging.value = true
                                     return dragDistance
                                 }
@@ -90,7 +88,20 @@ fun SpringScreen() {
                                 top.linkTo(parent.top)
                                 bottom.linkTo(button.bottom, margin = 25.dp)
                             }
-            )
+            ) {
+                Box(
+                        modifier = Modifier
+                                .align(alignment = Alignment.BottomCenter)
+                                .offset(x = 0.dp, y = ((if (isDragging.value) dy.value else height) * 0.5f - 50.dp) * 0.5f)
+                ) {
+                    Box(
+                            modifier = Modifier.fillMaxWidth()
+                                    .clip(shape = HillShape)
+                                    .height(height = 100.dp)
+                                    .background(color = Color(0xFF3F6274))
+                    )
+                }
+            }
 
             Box(
                     modifier = Modifier.size(size = 50.dp)
@@ -106,7 +117,7 @@ fun SpringScreen() {
                     asset = vectorResource(id = R.drawable.ic_paper_plane),
                     modifier = Modifier
                             .drawLayer(
-                                    rotationZ = ((if(isDragging.value) dy.value else height) - 200.dp).value * 0.6f
+                                    rotationZ = 45f - (dy.value - 200.dp).value * 0.6f
                             )
                             .constrainAs(paperPlane) {
                                 start.linkTo(button.start)
