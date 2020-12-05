@@ -4,6 +4,7 @@ import `in`.surajsau.tenji.neomorph.ButtonState
 import `in`.surajsau.tenji.neomorph.NeomorphButton
 import `in`.surajsau.tenji.neomorph.NeomorphColor
 import `in`.surajsau.tenji.neomorph.buttonStateProgress
+import `in`.surajsau.tenji.spring.SpringScreen
 import `in`.surajsau.tenji.ticker.SlotMachine
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -36,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
 @Composable
 fun mainActivity() {
-    SlotMachine()
+    SpringScreen()
 }
 
 @Preview(showBackground = true)
