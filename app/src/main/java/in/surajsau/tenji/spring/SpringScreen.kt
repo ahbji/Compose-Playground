@@ -2,7 +2,11 @@ package `in`.surajsau.tenji.spring
 
 import android.util.Log
 import androidx.compose.animation.DpPropKey
+import androidx.compose.animation.DpToVectorConverter
+import androidx.compose.animation.VectorConverter
 import androidx.compose.animation.animate
+import androidx.compose.animation.animatedFloat
+import androidx.compose.animation.animatedValue
 import androidx.compose.animation.core.*
 import androidx.compose.animation.transition
 import androidx.compose.foundation.Image
@@ -31,6 +35,7 @@ import androidx.compose.ui.gesture.Direction
 import androidx.compose.ui.gesture.DragObserver
 import androidx.compose.ui.gesture.dragGestureFilter
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.DensityAmbient
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.Dp
@@ -41,12 +46,14 @@ import com.example.genshinloader.R
 import kotlin.math.abs
 
 enum class DragState {
-    DRAGGING, END
+    DRAGGING, END, NONE
 }
 
 val appBarHeight = DpPropKey("appBarHeight")
 val hillOffset = DpPropKey("hillOffset")
 val rocketRotationIcon = FloatPropKey("rocketRotation")
+
+val flightProgress = FloatPropKey("flight_progress")
 
 @Composable
 fun SpringScreen() {
@@ -59,41 +66,15 @@ fun SpringScreen() {
         ) {
             val (button, appBar, paperPlane) = createRefs()
 
-            val dragState = remember { mutableStateOf(DragState.END) }
-            val height = remember { mutableStateOf(200.dp) }
+            val y = animatedFloat(initVal = 200f)
 
-            val transition = transition(definition = transitionDefinition {
-               state(DragState.DRAGGING) {
-                   this[appBarHeight] = height.value
-//                   this[hillOffset] = (height.value - 200.dp) * 0.3f
-                   this[rocketRotationIcon] = (height.value - 200.dp)/200.dp * 15f
-               }
-               state(DragState.END) {
-                   this[appBarHeight] = 200.dp
-//                   this[hillOffset] = 0.dp
-                   this[rocketRotationIcon] = 0f
-               }
+            val planeRotation = animatedFloat(initVal = 0f)
 
-                transition(DragState.DRAGGING to DragState.END) {
-                    appBarHeight using spring(
-                        stiffness = Spring.StiffnessLow,
-                        dampingRatio = Spring.DampingRatioMediumBouncy
-                    )
-
-                    rocketRotationIcon using spring(
-                        stiffness = Spring.StiffnessLow,
-                        dampingRatio = Spring.DampingRatioMediumBouncy
-                    )
-
-//                    hillOffset using spring(
-//                        stiffness = Spring.StiffnessLow,
-//                        dampingRatio = Spring.DampingRatioLowBouncy
-//                    )
-                }
-            }, initState = DragState.DRAGGING, toState = dragState.value)
+            val yOffset = animatedFloat(initVal = 0f)
+            val xOffset = animatedFloat(initVal = 0f)
 
             AppBar(
-                height = transition,
+                height = y.value.dp,
                 modifier = Modifier
                     .fillMaxWidth()
                     .constrainAs(appBar) {
@@ -101,24 +82,64 @@ fun SpringScreen() {
                         bottom.linkTo(button.bottom, margin = 25.dp)
                     },
                 onDragEnded = {
-                    dragState.value = DragState.END
+                      xOffset.animateTo(
+                              targetValue = 300f,
+                              anim = tween(
+                                      durationMillis = 400,
+                                      easing = FastOutLinearInEasing,
+                              )
+                      ) { _, _ ->
+                          planeRotation.animateTo(0f, anim = tween(
+                                  durationMillis = 600,
+                                  delayMillis = 1000,
+                                  easing = LinearOutSlowInEasing,
+                          ))
+
+                          xOffset.animateTo(-60f, anim = tween(
+                                  durationMillis = 600,
+                                  delayMillis = 1000,
+                                  easing = LinearOutSlowInEasing,
+                          ))
+                      }
+                        yOffset.animateTo(
+                                targetValue = -500f,
+                                anim = tween(
+                                        durationMillis = 400,
+                                        easing = FastOutLinearInEasing,
+                                )
+                        ) { _, _ ->
+                            yOffset.animateTo(0f, anim = tween(
+                                    durationMillis = 600,
+                                    delayMillis = 1000,
+                                    easing = FastOutLinearInEasing,
+                            ))
+                        }
+                      y.animateTo(
+                              targetValue = 200f,
+                              anim = spring(
+                                      dampingRatio = Spring.DampingRatioHighBouncy,
+                                      stiffness = 800f
+                              )
+                      )
                 },
                 onDragging = {
-                    dragState.value = DragState.DRAGGING
-                    height.value += (it.y * 0.1f).dp
+                    planeRotation.animateTo(
+                            targetValue = minOf((y.targetValue - 200f) * 45/200, 15f),
+                            anim = spring(
+                                    dampingRatio = Spring.DampingRatioNoBouncy,
+                                    stiffness = Spring.StiffnessHigh
+                            )
+                    )
+                    y.animateTo(
+                            targetValue = y.targetValue + (it.y * 0.1f),
+                            anim = spring(
+                                    dampingRatio = Spring.DampingRatioNoBouncy,
+                                    stiffness = Spring.StiffnessHigh
+                            )
+                    )
                 },
-                onDragStarted = {
-                    height.value = 200.dp
-                }
-            ) {
-//                Hills(
-//                    state = transition,
-//                    modifier = Modifier
-//                        .fillMaxWidth()
-//                        .align(alignment = Alignment.BottomCenter)
-//                        .height(height = 100.dp)
-//                )
-            }
+                onDragStarted = {}
+            ){}
 
             val buttonStartGuide = createGuidelineFromStart(offset = 16.dp)
             FloatingButton(
@@ -130,15 +151,16 @@ fun SpringScreen() {
                     }
             )
 
-            val iconBottomGuide = createGuidelineFromBottom(offset = 12.dp)
-            val iconStartGuide = createGuidelineFromStart(offset = 30.dp)
             RocketIcon(
-                state = transition,
+                offsetState = Pair(xOffset.value, yOffset.value),
+                rotationZ = planeRotation.value,
                 modifier = Modifier
                     .wrapContentSize()
                     .constrainAs(paperPlane) {
-                        start.linkTo(iconStartGuide)
-                        bottom.linkTo(iconBottomGuide)
+                        start.linkTo(button.start)
+                        end.linkTo(button.end)
+                        bottom.linkTo(button.bottom)
+                        top.linkTo(button.top)
                     }
             )
 
@@ -193,28 +215,38 @@ fun FloatingButton(
 
 @Composable
 fun RocketIcon(
-    state: TransitionState,
+    offsetState: Pair<Float, Float>,
+    rotationZ: Float,
     modifier: Modifier = Modifier
 ) {
-    Image(
-        asset = vectorResource(id = R.drawable.ic_paper_plane),
-        modifier = modifier
-            .drawLayer(rotationZ = state[rocketRotationIcon])
-    )
+    Box(modifier = modifier
+            .offset(
+                    x = with(DensityAmbient.current) { offsetState.first.toDp() } ,
+                    y = with(DensityAmbient.current) { offsetState.second.toDp() }
+            )
+    ) {
+        Image(
+                asset = vectorResource(id = R.drawable.ic_paper_plane),
+                modifier = Modifier
+                        .wrapContentSize()
+                        .drawLayer(rotationZ = -rotationZ)
+        )
+    }
 }
 
 @Composable
 fun AppBar(
-    height: TransitionState,
+    height: Dp,
     onDragEnded: () -> Unit,
     onDragging: (Offset) -> Unit,
     onDragStarted: () -> Unit,
     modifier: Modifier = Modifier,
     children: @Composable BoxScope.() -> Unit
 ) {
+    Log.e("Appbar", "height: ${height.value}")
     Box(
         modifier = modifier
-            .height(height = height[appBarHeight])
+            .height(height = height)
             .background(color = Color(0xFF7DCFCC))
             .clipToBounds()
             .dragGestureFilter(object : DragObserver {
@@ -225,7 +257,7 @@ fun AppBar(
 
                 override fun onDrag(dragDistance: Offset): Offset {
                     onDragging(dragDistance)
-                    return dragDistance
+                    return super.onDrag(dragDistance)
                 }
 
                 override fun onStart(downPosition: Offset) {
