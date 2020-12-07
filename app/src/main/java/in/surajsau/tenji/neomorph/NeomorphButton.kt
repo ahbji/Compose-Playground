@@ -51,50 +51,8 @@ val buttonStateProgress = FloatPropKey()
 
 @Composable
 fun NeomorphButton(
-        shape: Shape = CircleShape,
-        state: TransitionState,
-        modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier
 ) {
-    val bias = (3 - 2f * state[buttonStateProgress])
-
-    Box(modifier = modifier.size(size = 200.dp)) {
-        Box(modifier = Modifier.size(120.dp)
-                .clip(shape = shape)
-                .background(
-                        brush = RadialGradient(
-                                colors = listOf(NeomorphLightColor, NeomorphLightColor, Color.Transparent),
-                                radius = 120.dp.value,
-                                centerX = 120.dp.value,
-                                centerY = 120.dp.value
-                        )
-                )
-                .align(alignment = BiasAlignment(bias * -0.1f, bias * -0.1f))
-        )
-
-        Box(modifier = Modifier.size(120.dp)
-                .clip(shape = shape)
-                .background(
-                        brush = RadialGradient(
-                                colors = listOf(NeomorphDarkColor, NeomorphDarkColor, Color.Transparent),
-                                radius = 120.dp.value,
-                                centerX = 120.dp.value,
-                                centerY = 120.dp.value
-                        )
-                )
-                .align(alignment = BiasAlignment(bias * 0.1f, bias * 0.1f))
-        )
-
-        Box(modifier = Modifier.size(size = 100.dp)
-                .clip(shape = shape)
-                .align(alignment = Alignment.Center)
-                .background(color = NeomorphColor))
-    }
-}
-
-@Preview
-@Composable
-fun PreviewNeomorphButton() {
-
     val buttonState = remember { mutableStateOf(ButtonState.IDLE) }
     val fromState = if(buttonState.value == ButtonState.IDLE) {
         ButtonState.PRESSED
@@ -116,14 +74,65 @@ fun PreviewNeomorphButton() {
             toState = buttonState.value
     )
 
-    Box(modifier = Modifier.fillMaxSize()
-            .background(color = NeomorphColor)) {
-        NeomorphButton(state = state, modifier = Modifier
-                .align(Alignment.Center)
-                .pressIndicatorGestureFilter(
-                        onStart = { buttonState.value = ButtonState.PRESSED },
-                        onStop = { buttonState.value = ButtonState.IDLE }
+
+    CircleNeomorph(state = state, modifier = modifier
+            .pressIndicatorGestureFilter(
+                    onStart = { buttonState.value = ButtonState.PRESSED },
+                    onStop = { buttonState.value = ButtonState.IDLE }
+            )
+    )
+}
+
+@Composable
+fun CircleNeomorph(
+        state: TransitionState,
+        modifier: Modifier = Modifier,
+) {
+    val bias = (3 - 2f * state[buttonStateProgress])
+
+    Box(modifier = modifier.size(size = 200.dp)) {
+        Box(modifier = Modifier.size(120.dp)
+                .clip(shape = CircleShape)
+                .background(
+                        brush = RadialGradient(
+                                colors = listOf(NeomorphLightColor, NeomorphLightColor, Color.Transparent),
+                                radius = 120.dp.value,
+                                centerX = 120.dp.value,
+                                centerY = 120.dp.value
+                        )
                 )
+                .align(alignment = BiasAlignment(bias * -0.1f, bias * -0.1f))
+        )
+
+        Box(modifier = Modifier.size(120.dp)
+                .clip(shape = CircleShape)
+                .background(
+                        brush = RadialGradient(
+                                colors = listOf(NeomorphDarkColor, NeomorphDarkColor, Color.Transparent),
+                                radius = 120.dp.value,
+                                centerX = 120.dp.value,
+                                centerY = 120.dp.value
+                        )
+                )
+                .align(alignment = BiasAlignment(bias * 0.1f, bias * 0.1f))
+        )
+
+//        Box(modifier = Modifier.size(size = 100.dp)
+//                .clip(shape = CircleShape)
+//                .align(alignment = Alignment.Center)
+//                .background(color = NeomorphColor))
+    }
+}
+
+@Preview
+@Composable
+fun PreviewNeomorphButton() {
+
+    Box(modifier = Modifier.background(color = NeomorphColor)
+            .fillMaxSize()) {
+        NeomorphButton(
+                modifier = Modifier.align(alignment = Alignment.Center)
         )
     }
+
 }
