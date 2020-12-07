@@ -66,7 +66,7 @@ fun ItemCard(
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.fillMaxWidth()
                             .fillMaxHeight(fraction = 0.8f),
-                    alignment = BiasAlignment((scrollX / 3000f), 0f)
+                    alignment = BiasAlignment((scrollX / 1500f), 0f)
             )
 
             Text(text = item.title,
@@ -91,6 +91,7 @@ data class Item(
 @Composable
 @Preview
 fun previewParallax() {
+    rememberScrollState()
     Row(modifier = Modifier.fillMaxSize().background(color = Color.White)) {
         Parallax(
                 modifier = Modifier

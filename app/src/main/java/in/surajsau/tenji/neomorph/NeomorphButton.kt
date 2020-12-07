@@ -70,8 +70,8 @@ fun NeomorphButton(
                     buttonStateProgress using tween()
                 }
             },
-            initState = fromState,
-            toState = buttonState.value
+            initState = buttonState.value,
+            toState = fromState
     )
 
 
@@ -117,10 +117,10 @@ fun CircleNeomorph(
                 .align(alignment = BiasAlignment(bias * 0.1f, bias * 0.1f))
         )
 
-//        Box(modifier = Modifier.size(size = 100.dp)
-//                .clip(shape = CircleShape)
-//                .align(alignment = Alignment.Center)
-//                .background(color = NeomorphColor))
+        Box(modifier = Modifier.size(size = 100.dp)
+                .clip(shape = CircleShape)
+                .align(alignment = Alignment.Center)
+                .background(color = NeomorphColor))
     }
 }
 

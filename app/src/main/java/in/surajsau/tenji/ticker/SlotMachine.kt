@@ -29,8 +29,8 @@ fun SlotMachine() {
         modifier = Modifier
             .fillMaxSize()
     ) {
-        val previous = mutableStateOf(0)
-        val random = mutableStateOf(0)
+        val previous = remember { mutableStateOf(0) }
+        val random = remember { mutableStateOf(0) }
 
         val c1 = derivedStateOf {
             Pair((previous.value / 100), (random.value / 100))
@@ -49,9 +49,9 @@ fun SlotMachine() {
                         .align(alignment = Alignment.Center)
         ) {
             Row {
-                SlotMachineColumn(value = c1)
-                SlotMachineColumn(value = c2)
-                SlotMachineColumn(value = c3)
+                SlotMachineColumn(value = Pair((previous.value / 100), (random.value / 100)))
+                SlotMachineColumn(value = Pair((previous.value/10)%10, (random.value/10)%10))
+                SlotMachineColumn(value = Pair(previous.value%10, random.value%10))
             }
             
             Spacer(modifier = Modifier.height(height = 16.dp))
@@ -72,10 +72,10 @@ fun SlotMachine() {
 
 @Composable
 fun SlotMachineColumn(
-    value: State<Pair<Int, Int>>,
+    value: Pair<Int, Int>,
     modifier: Modifier = Modifier
 ) {
-    val (from, to) = value.value
+    val (from, to) = value
     Box(
         modifier = modifier
             .height(height = 50.dp)
@@ -117,6 +117,7 @@ fun PreviewSlotMachine() {
         Box(
             modifier = Modifier
                 .background(color = Color.White)
+                    .clipToBounds()
                 .fillMaxSize()
         ) {
             SlotMachine()

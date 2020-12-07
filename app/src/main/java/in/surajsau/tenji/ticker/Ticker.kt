@@ -26,15 +26,16 @@ fun Ticker(
         to: Int,
         modifier: Modifier = Modifier,
 ) {
+    val modifiedTo = if(to < from) to + 10 else to
     TickerText(
             state = transition(
                     definition = transitionDefinition {
                         state(0) { this[currentTickerValue] = from.toFloat() }
-                        state(1) { this[currentTickerValue] = to.toFloat() }
+                        state(1) { this[currentTickerValue] = modifiedTo.toFloat() }
 
                         transition(0 to 1) {
                             currentTickerValue using tween(
-                                    durationMillis = abs(to - from) * 3_00,
+                                    durationMillis = abs(modifiedTo - from) * 3_00,
                                     easing = LinearEasing
                             )
                         }
@@ -51,7 +52,7 @@ fun TickerText(
         state: TransitionState,
         modifier: Modifier = Modifier
 ) {
-    val toString = "${state[currentTickerValue].toInt()}"
+    val toString = "${state[currentTickerValue].toInt() % 10}"
     val delta = state[currentTickerValue] - state[currentTickerValue].toInt()
     val numberOfDigits = toString.length
     Box(modifier = modifier.size(
