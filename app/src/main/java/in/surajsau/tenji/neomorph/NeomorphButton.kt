@@ -1,16 +1,17 @@
 package `in`.surajsau.tenji.neomorph
 
-import `in`.surajsau.tenji.androidx.Circle
-import `in`.surajsau.tenji.androidx.GradientCircle
-import `in`.surajsau.tenji.androidx.Shape
-import `in`.surajsau.tenji.androidx.Size
+import `in`.surajsau.tenji.androidx.*
+import android.util.Log
 import androidx.compose.animation.core.FloatPropKey
 import androidx.compose.animation.core.TransitionState
 import androidx.compose.animation.core.transitionDefinition
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.transition
+import androidx.compose.foundation.InteractionState
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -23,10 +24,18 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawShadow
+import androidx.compose.ui.gesture.pressIndicatorGestureFilter
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RadialGradient
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.layout.WithConstraints
+import androidx.compose.ui.platform.ContextAmbient
+import androidx.compose.ui.platform.DensityAmbient
 import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
 
@@ -34,75 +43,51 @@ enum class ButtonState {
     IDLE, PRESSED
 }
 
-val NeomorphLightColor = Color(254, 254, 254)
-val NeomorphDarkColor = Color(209, 217, 229)
-val NeomorphColor = Color(236, 238, 240)
+val NeomorphLightColor = Color(255, 255, 255)
+val NeomorphDarkColor = Color(200, 210, 220)
+val NeomorphColor = Color(230, 232, 234)
 
 val buttonStateProgress = FloatPropKey()
 
 @Composable
 fun NeomorphButton(
+        shape: Shape = CircleShape,
         state: TransitionState,
-        buttonState: MutableState<ButtonState>,
-        onClick: (() -> Unit)? = null
+        modifier: Modifier = Modifier,
 ) {
+    val bias = (3 - 2f * state[buttonStateProgress])
 
-    Box(modifier = Modifier.size(size = 100.dp)) {
-        GradientCircle(
-                radius = 80.dp,
-                colors = listOf(NeomorphDarkColor, NeomorphDarkColor, Color.Transparent),
-                modifier = Modifier.offset(
-                        x = 10.dp - (7 * state[buttonStateProgress]).dp,
-                        y = 10.dp - (7 * state[buttonStateProgress]).dp
-                )
-        )
-
-        GradientCircle(
-                radius = 80.dp,
-                colors = listOf(NeomorphLightColor, NeomorphLightColor, Color.Transparent),
-                modifier = Modifier.offset(
-                        x = 10.dp + (7 * state[buttonStateProgress]).dp,
-                        y = 10.dp + (7 * state[buttonStateProgress]).dp
-                )
-        )
-
-        Circle(
-                radius = 60.dp,
-                color = NeomorphColor,
-                modifier = Modifier
-                        .offset(
-                                x = 20.dp,
-                                y = 20.dp
+    Box(modifier = modifier.size(size = 200.dp)) {
+        Box(modifier = Modifier.size(120.dp)
+                .clip(shape = shape)
+                .background(
+                        brush = RadialGradient(
+                                colors = listOf(NeomorphLightColor, NeomorphLightColor, Color.Transparent),
+                                radius = 120.dp.value,
+                                centerX = 120.dp.value,
+                                centerY = 120.dp.value
                         )
-                        .clickable(
-                            onClick = {
-                                buttonState.value = if (buttonState.value == ButtonState.PRESSED) {
-                                    ButtonState.IDLE
-                                } else {
-                                    ButtonState.PRESSED
-                                }
-                                onClick?.invoke()
-                            }
-                        )
+                )
+                .align(alignment = BiasAlignment(bias * -0.1f, bias * -0.1f))
         )
 
-//        Button(
-//                onClick = {
-//                    buttonState.value = if (buttonState.value == ButtonState.PRESSED) {
-//                        ButtonState.IDLE
-//                    } else {
-//                        ButtonState.PRESSED
-//                    }
-//                    onClick?.invoke()
-//                },
-//                colors = ButtonConstants.defaultButtonColors(
-//                        backgroundColor = NeomorphColor
-//                ),
-//                shape = RoundedCornerShape (size = 30.dp),
-//                modifier = Modifier.size(size = 60.dp)
-//                        .align(alignment = Alignment.Center)
-//                        .drawShadow(elevation = 0.dp)
-//        ) {}
+        Box(modifier = Modifier.size(120.dp)
+                .clip(shape = shape)
+                .background(
+                        brush = RadialGradient(
+                                colors = listOf(NeomorphDarkColor, NeomorphDarkColor, Color.Transparent),
+                                radius = 120.dp.value,
+                                centerX = 120.dp.value,
+                                centerY = 120.dp.value
+                        )
+                )
+                .align(alignment = BiasAlignment(bias * 0.1f, bias * 0.1f))
+        )
+
+        Box(modifier = Modifier.size(size = 100.dp)
+                .clip(shape = shape)
+                .align(alignment = Alignment.Center)
+                .background(color = NeomorphColor))
     }
 }
 
@@ -111,24 +96,34 @@ fun NeomorphButton(
 fun PreviewNeomorphButton() {
 
     val buttonState = remember { mutableStateOf(ButtonState.IDLE) }
+    val fromState = if(buttonState.value == ButtonState.IDLE) {
+        ButtonState.PRESSED
+    } else {
+        ButtonState.IDLE
+    }
+
     val state = transition(
             definition = transitionDefinition {
                 state(ButtonState.IDLE) { this[buttonStateProgress] = 0f }
                 state(ButtonState.PRESSED) { this[buttonStateProgress] = 1f }
 
-                transition(ButtonState.IDLE to ButtonState.PRESSED) {
-                    buttonStateProgress using tween()
-                }
-
-                transition(ButtonState.PRESSED to ButtonState.IDLE) {
+                transition(ButtonState.IDLE to ButtonState.PRESSED,
+                        ButtonState.PRESSED to ButtonState.IDLE) {
                     buttonStateProgress using tween()
                 }
             },
-            initState = buttonState.value,
-            toState = ButtonState.PRESSED
+            initState = fromState,
+            toState = buttonState.value
     )
 
-    Surface(color = NeomorphColor) {
-        NeomorphButton(state = state, buttonState = buttonState)
+    Box(modifier = Modifier.fillMaxSize()
+            .background(color = NeomorphColor)) {
+        NeomorphButton(state = state, modifier = Modifier
+                .align(Alignment.Center)
+                .pressIndicatorGestureFilter(
+                        onStart = { buttonState.value = ButtonState.PRESSED },
+                        onStop = { buttonState.value = ButtonState.IDLE }
+                )
+        )
     }
 }
