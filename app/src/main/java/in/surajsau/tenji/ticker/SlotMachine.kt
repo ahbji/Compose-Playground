@@ -106,9 +106,6 @@ fun SlotMachineColumn(
                 to = to,
                 modifier = Modifier
                     .align(alignment = Alignment.Center),
-                onStateChangeFinished = {
-
-                }
         )
     }
 }
