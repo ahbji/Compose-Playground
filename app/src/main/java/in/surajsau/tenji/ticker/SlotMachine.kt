@@ -20,7 +20,7 @@ import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.drawLayer
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 import kotlin.random.Random
 
 @Composable

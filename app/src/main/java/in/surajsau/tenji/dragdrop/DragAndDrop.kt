@@ -21,7 +21,7 @@ import androidx.compose.ui.gesture.dragGestureFilter
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.DensityAmbient
 import androidx.compose.ui.unit.dp
-import androidx.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun DragAndDrop() {

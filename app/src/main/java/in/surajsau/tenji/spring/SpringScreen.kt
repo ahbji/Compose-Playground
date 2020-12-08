@@ -2,7 +2,6 @@ package `in`.surajsau.tenji.spring
 
 import android.util.Log
 import androidx.compose.animation.DpPropKey
-import androidx.compose.animation.DpToVectorConverter
 import androidx.compose.animation.VectorConverter
 import androidx.compose.animation.animate
 import androidx.compose.animation.animatedFloat
@@ -35,13 +34,14 @@ import androidx.compose.ui.gesture.Direction
 import androidx.compose.ui.gesture.DragObserver
 import androidx.compose.ui.gesture.dragGestureFilter
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.AmbientDensity
 import androidx.compose.ui.platform.DensityAmbient
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.genshinloader.R
 import kotlin.math.abs
 
@@ -221,12 +221,12 @@ fun RocketIcon(
 ) {
     Box(modifier = modifier
             .offset(
-                    x = with(DensityAmbient.current) { offsetState.first.toDp() } ,
-                    y = with(DensityAmbient.current) { offsetState.second.toDp() }
+                    x = with(AmbientDensity.current) { offsetState.first.toDp() } ,
+                    y = with(AmbientDensity.current) { offsetState.second.toDp() }
             )
     ) {
         Image(
-                asset = vectorResource(id = R.drawable.ic_paper_plane),
+                imageVector = vectorResource(id = R.drawable.ic_paper_plane),
                 modifier = Modifier
                         .wrapContentSize()
                         .drawLayer(rotationZ = -rotationZ)
@@ -265,7 +265,7 @@ fun AppBar(
                     onDragStarted()
                 }
             }),
-        children = children
+        content = children
     )
 }
 

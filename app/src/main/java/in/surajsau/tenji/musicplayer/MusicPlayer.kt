@@ -40,6 +40,8 @@ import androidx.compose.ui.focusObserver
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.ImageAsset
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.vectorResource
@@ -47,7 +49,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.genshinloader.R
 import kotlin.math.absoluteValue
 
@@ -117,7 +119,7 @@ fun MusicPlayer(modifier: Modifier = Modifier) {
                         modifier = Modifier.align(alignment = Alignment.CenterVertically)
                 ) {
                     Image(
-                            asset = vectorResource(id = R.drawable.ic_rewind_button),
+                            imageVector = vectorResource(id = R.drawable.ic_rewind_button),
                             colorFilter = ColorFilter.tint(color = NeomorphColor)
                     )
                 }
@@ -133,7 +135,7 @@ fun MusicPlayer(modifier: Modifier = Modifier) {
                         modifier = Modifier.align(alignment = Alignment.CenterVertically)
                 ) {
                     Image(
-                            asset = vectorResource(
+                            imageVector = vectorResource(
                                     id = if(isPlaying.value)
                                             R.drawable.ic_play_button_arrowhead
                                         else
@@ -154,7 +156,7 @@ fun MusicPlayer(modifier: Modifier = Modifier) {
                         modifier = Modifier.align(alignment = Alignment.CenterVertically)
                 ) {
                     Image(
-                            asset = vectorResource(id = R.drawable.ic_fast_forward),
+                            imageVector = vectorResource(id = R.drawable.ic_fast_forward),
                             colorFilter = ColorFilter.tint(color = NeomorphColor),
                     )
                 }
@@ -184,11 +186,11 @@ fun MusicPlayer(modifier: Modifier = Modifier) {
 
 @Composable
 fun Disc(
-    timeSpent: Int,
-    totalTime: Int,
-    isPlaying: Boolean,
-    imageAsset: ImageAsset,
-    modifier: Modifier = Modifier,
+        timeSpent: Int,
+        totalTime: Int,
+        isPlaying: Boolean,
+        imageAsset: ImageBitmap,
+        modifier: Modifier = Modifier,
 ) {
     val rotate = animate(
             target = if(isPlaying) 360f else 360f * (3000f/totalTime),
@@ -208,7 +210,7 @@ fun Disc(
             shape = CircleShape,
             backgroundColor = Color.Transparent
     ) {
-        Image(asset = imageAsset,
+        Image(bitmap = imageAsset,
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
                 .size(size = 200.dp)

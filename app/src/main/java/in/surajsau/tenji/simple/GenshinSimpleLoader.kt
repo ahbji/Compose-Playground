@@ -21,7 +21,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.unit.dp
-import androidx.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.genshinloader.R
 
 @Composable
@@ -42,7 +42,7 @@ fun GenshinSimpleLoader(
             ).forEach { imageRes ->
                 Box(modifier = Modifier.size(size = 50.dp)) {
                     Image(
-                            asset = imageResource(id = imageRes),
+                            bitmap = imageResource(id = imageRes),
                             modifier = Modifier.fillMaxSize(),
                             colorFilter = ColorFilter.tint(defaultColour)
                     )

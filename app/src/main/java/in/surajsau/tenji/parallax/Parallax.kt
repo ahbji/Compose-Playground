@@ -21,7 +21,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.genshinloader.R
 
 val items = listOf(
@@ -62,7 +62,7 @@ fun ItemCard(
     ) {
         Column(modifier = Modifier.fillMaxWidth()) {
             Image(
-                    asset = imageResource(id = item.imageId),
+                    bitmap = imageResource(id = item.imageId),
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.fillMaxWidth()
                             .fillMaxHeight(fraction = 0.8f),
