@@ -37,7 +37,7 @@ import androidx.compose.ui.layout.WithConstraints
 import androidx.compose.ui.platform.ContextAmbient
 import androidx.compose.ui.platform.DensityAmbient
 import androidx.compose.ui.unit.dp
-import androidx.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 
 enum class ButtonState {
     IDLE, PRESSED

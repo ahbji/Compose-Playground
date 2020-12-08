@@ -22,10 +22,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.VectorAsset
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
-import androidx.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.genshinloader.R
 
 val purpleDark = Color(0xFF5B38B7)
@@ -117,7 +117,7 @@ fun BottomBar(
 @Composable
 fun Tab(
     state: TransitionState,
-    asset: VectorAsset,
+    asset: ImageVector,
     text: String,
     textColor: Color,
     backgroundColor: Color,
@@ -140,7 +140,7 @@ fun Tab(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Image(
-                    asset = asset,  // new code
+                    imageVector = asset,  // new code
                     modifier = Modifier.size(24.dp)
                 )
             }
