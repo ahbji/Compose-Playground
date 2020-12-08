@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.ui.tooling.preview.Preview
 import com.example.genshinloader.R
 
 @Composable
