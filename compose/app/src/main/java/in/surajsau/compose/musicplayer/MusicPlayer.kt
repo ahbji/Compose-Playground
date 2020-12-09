@@ -10,8 +10,6 @@ import androidx.compose.animation.core.VectorConverter
 import androidx.compose.animation.core.repeatable
 import androidx.compose.animation.core.snap
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -37,6 +35,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
 import `in`.surajsau.compose.R
+import `in`.surajsau.compose.androidx.toggle
+import `in`.surajsau.compose.neomorph.NeomorphDarkColor
+import androidx.compose.animation.animatedFloat
+import androidx.compose.foundation.*
+import androidx.compose.material.ripple.AmbientRippleTheme
+import androidx.compose.material.ripple.RippleIndication
+import androidx.compose.material.ripple.rememberRippleIndication
+import androidx.compose.ui.ContentDrawScope
+import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.gesture.pressIndicatorGestureFilter
+import androidx.compose.ui.graphics.vector.ImageVector
 
 val colorBg = Color(0xFFF4DEE4)
 
@@ -45,12 +54,7 @@ fun MusicPlayer(modifier: Modifier = Modifier) {
 
     val isPlaying = remember { mutableStateOf(false) }
 
-    val offset = animate(
-            target = if(isPlaying.value) (-50).dp else 0.dp,
-            animSpec = tween(durationMillis = 500)
-    )
-
-    val focusedButton = remember { mutableStateOf(-1) }
+    val behindCardOffset = animatedValue(initVal = 0.dp, converter = Dp.VectorConverter)
 
     ConstraintLayout(modifier = modifier
         .fillMaxWidth()
@@ -61,9 +65,8 @@ fun MusicPlayer(modifier: Modifier = Modifier) {
         Card(
             modifier = Modifier.fillMaxWidth(fraction = 0.9f)
                 .height(height = 100.dp)
-                .offset(y = offset)
                 .constrainAs(progressCard) {
-                    bottom.linkTo(parent.bottom)
+                    bottom.linkTo(parent.bottom, margin = behindCardOffset.value)
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                 },
@@ -88,63 +91,31 @@ fun MusicPlayer(modifier: Modifier = Modifier) {
             elevation = 30.dp,
         ){
             Row(
-                    modifier = Modifier.fillMaxSize()
-                            .padding(all = 16.dp)
+                modifier = Modifier.fillMaxSize()
+                            .padding(all = 16.dp),
+                horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 Spacer(modifier = Modifier.width(120.dp))
 
-                Button(onClick = {},
-                        colors = ButtonConstants.defaultButtonColors(
-                                backgroundColor = Color.Transparent
-                        ),
-                        elevation = ButtonConstants.defaultElevation(
-                                defaultElevation = 0.dp,
-                                pressedElevation = 0.dp
-                        ),
-                        modifier = Modifier.align(alignment = Alignment.CenterVertically)
-                ) {
-                    Image(
-                            imageVector = vectorResource(id = R.drawable.ic_rewind_button),
-                            colorFilter = ColorFilter.tint(color = NeomorphColor)
-                    )
+                ControlButton(
+                    imageVector = vectorResource(id = R.drawable.ic_fast_forward),
+                    modifier = Modifier.align (alignment = Alignment.CenterVertically)
+                        .rotate(degrees = 180f)
+                ) {}
+
+                ControlButton(imageVector = vectorResource(
+                    id = if(isPlaying.value)
+                        R.drawable.ic_play_button_arrowhead
+                    else
+                        R.drawable.ic_pause
+                ), modifier = Modifier.align(alignment = Alignment.CenterVertically)) {
+                    isPlaying.value = !isPlaying.value
                 }
 
-                Button(onClick = { isPlaying.value = !isPlaying.value },
-                        colors = ButtonConstants.defaultButtonColors(
-                                backgroundColor = Color.Transparent
-                        ),
-                        elevation = ButtonConstants.defaultElevation(
-                                defaultElevation = 0.dp,
-                                pressedElevation = 0.dp
-                        ),
-                        modifier = Modifier.align(alignment = Alignment.CenterVertically)
-                ) {
-                    Image(
-                            imageVector = vectorResource(
-                                    id = if(isPlaying.value)
-                                            R.drawable.ic_play_button_arrowhead
-                                        else
-                                            R.drawable.ic_pause
-                            ),
-                            colorFilter = ColorFilter.tint(color = NeomorphColor)
-                    )
-                }
-
-                Button(onClick = {},
-                        colors = ButtonConstants.defaultButtonColors(
-                                backgroundColor = Color.Transparent
-                        ),
-                        elevation = ButtonConstants.defaultElevation(
-                                defaultElevation = 0.dp,
-                                pressedElevation = 0.dp
-                        ),
-                        modifier = Modifier.align(alignment = Alignment.CenterVertically)
-                ) {
-                    Image(
-                            imageVector = vectorResource(id = R.drawable.ic_fast_forward),
-                            colorFilter = ColorFilter.tint(color = NeomorphColor),
-                    )
-                }
+                ControlButton(
+                    imageVector = vectorResource(id = R.drawable.ic_fast_forward),
+                    modifier = Modifier.align (alignment = Alignment.CenterVertically)
+                ) {}
             }
         }
 
@@ -166,6 +137,31 @@ fun MusicPlayer(modifier: Modifier = Modifier) {
                 },
         )
 
+    }
+}
+
+@Composable
+fun ControlButton(
+    imageVector: ImageVector,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit
+) {
+    val isPressed = remember { mutableStateOf(false) }
+    Box(
+        modifier = modifier
+            .clickable(
+                onClick = onClick,
+                indication = rememberRippleIndication(radius = 0.dp)
+            )
+            .pressIndicatorGestureFilter(
+                onStart = { isPressed.value = true },
+                onStop = { isPressed.value = false }
+            )
+    ) {
+        Image(
+            imageVector = imageVector,
+            colorFilter = ColorFilter.tint(color = if(isPressed.value) NeomorphDarkColor else NeomorphColor),
+        )
     }
 }
 
