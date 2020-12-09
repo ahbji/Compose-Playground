@@ -1,4 +1,4 @@
-package `in`.surajsau.compose.neomorph
+package `in`.surajsau.compose.screens
 
 import androidx.compose.animation.core.FloatPropKey
 import androidx.compose.animation.core.TransitionState
@@ -20,8 +20,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.gesture.pressIndicatorGestureFilter
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RadialGradient
-import androidx.compose.ui.platform.ContextAmbient
-import androidx.compose.ui.platform.DensityAmbient
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
 

@@ -1,6 +1,5 @@
-package `in`.surajsau.compose.musicplayer
+package `in`.surajsau.compose.screens
 
-import `in`.surajsau.compose.neomorph.NeomorphColor
 import androidx.compose.animation.VectorConverter
 import androidx.compose.animation.animate
 import androidx.compose.animation.animatedValue
@@ -13,8 +12,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonConstants
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -35,14 +32,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
 import `in`.surajsau.compose.R
-import `in`.surajsau.compose.androidx.toggle
-import `in`.surajsau.compose.neomorph.NeomorphDarkColor
-import androidx.compose.animation.animatedFloat
 import androidx.compose.foundation.*
-import androidx.compose.material.ripple.AmbientRippleTheme
-import androidx.compose.material.ripple.RippleIndication
 import androidx.compose.material.ripple.rememberRippleIndication
-import androidx.compose.ui.ContentDrawScope
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.gesture.pressIndicatorGestureFilter
 import androidx.compose.ui.graphics.vector.ImageVector

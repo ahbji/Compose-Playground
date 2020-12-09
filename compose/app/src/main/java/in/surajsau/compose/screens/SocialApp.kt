@@ -1,4 +1,4 @@
-package `in`.surajsau.compose.dribbble
+package `in`.surajsau.compose.screens
 
 import `in`.surajsau.compose.R
 import androidx.compose.foundation.Image
@@ -14,7 +14,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.imageResource
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 

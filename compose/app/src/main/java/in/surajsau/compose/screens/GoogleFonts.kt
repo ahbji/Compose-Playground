@@ -1,4 +1,4 @@
-package `in`.surajsau.compose.googlefonts
+package `in`.surajsau.compose.screens
 
 import `in`.surajsau.compose.androidx.Circle
 import androidx.compose.animation.ColorPropKey

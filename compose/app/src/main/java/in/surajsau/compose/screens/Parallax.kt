@@ -1,4 +1,4 @@
-package `in`.surajsau.compose.parallax
+package `in`.surajsau.compose.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollableRow
