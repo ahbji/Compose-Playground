@@ -26,7 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 
 // https://dribbble.com/shots/2779833-Google-Fonts
 
-enum class ButtonState {
+enum class GoogleButtonState {
     PLUS, MINUS, F
 }
 
@@ -40,26 +40,26 @@ val textOffsetY = DpPropKey("text_offset_y")
 
 @Composable
 fun GoogleFonts(modifier: Modifier = Modifier) {
-    val buttonState = remember { mutableStateOf(ButtonState.PLUS) }
+    val buttonState = remember { mutableStateOf(GoogleButtonState.PLUS) }
     var text = remember { mutableStateOf("+") }
 
     val transition = transition(
         definition = transitionDefinition {
-            state(ButtonState.PLUS) {
+            state(GoogleButtonState.PLUS) {
                 this[rotateZ] = 0f
                 this[radius] = 0.dp
                 this[textColor] = Color.White
                 this[fontSize] = 90
                 this[textOffsetY] = (-15).dp
             }
-            state(ButtonState.MINUS) {
+            state(GoogleButtonState.MINUS) {
                 this[rotateZ] = 180f
                 this[radius] = 80.dp
                 this[textColor] = googleFontColor
                 this[fontSize] = 90
                 this[textOffsetY] = (-15).dp
             }
-            state(ButtonState.F) {
+            state(GoogleButtonState.F) {
                 this[rotateZ] = 360f
                 this[radius] = 0.dp
                 this[textColor] = Color.White
@@ -68,9 +68,9 @@ fun GoogleFonts(modifier: Modifier = Modifier) {
             }
 
             transition(
-                ButtonState.PLUS to ButtonState.MINUS,
-                ButtonState.MINUS to ButtonState.F,
-                ButtonState.F to ButtonState.PLUS
+                GoogleButtonState.PLUS to GoogleButtonState.MINUS,
+                GoogleButtonState.MINUS to GoogleButtonState.F,
+                GoogleButtonState.F to GoogleButtonState.PLUS
             ) {
                 rotateZ using tween(durationMillis = 250, easing = FastOutSlowInEasing)
                 radius using tween(durationMillis = 100, easing = FastOutSlowInEasing)
@@ -80,24 +80,24 @@ fun GoogleFonts(modifier: Modifier = Modifier) {
             }
 
         },
-        initState = ButtonState.PLUS,
+        initState = GoogleButtonState.PLUS,
         toState = buttonState.value
     )
 
     Box(modifier = modifier) {
         GoogleFontView(state = transition, text = text.value) {
             buttonState.value = when(buttonState.value) {
-                ButtonState.PLUS -> {
+                GoogleButtonState.PLUS -> {
                     text.value = "-"
-                    ButtonState.MINUS
+                    GoogleButtonState.MINUS
                 }
-                ButtonState.MINUS -> {
+                GoogleButtonState.MINUS -> {
                     text.value = "F"
-                    ButtonState.F
+                    GoogleButtonState.F
                 }
-                ButtonState.F -> {
+                GoogleButtonState.F -> {
                     text.value = "+"
-                    ButtonState.PLUS
+                    GoogleButtonState.PLUS
                 }
             }
         }
