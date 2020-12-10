@@ -8,6 +8,7 @@ import androidx.compose.animation.core.AnimationVector
 import androidx.compose.animation.core.AnimationVector4D
 import androidx.compose.animation.core.TwoWayConverter
 import androidx.compose.animation.transition
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -96,6 +97,17 @@ fun Face(
         modifier: Modifier = Modifier
 ) {
 
+}
+
+@Composable
+fun Mouth(
+        slideValue: Float,
+        modifier: Modifier = Modifier
+) {
+    Canvas(modifier = modifier) {
+        val width = size.width
+        val height = size.height
+    }
 }
 
 @Composable
