@@ -20,6 +20,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.gesture.pressIndicatorGestureFilter
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RadialGradient
+import androidx.compose.ui.layout.WithConstraints
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
 
@@ -35,7 +36,8 @@ val buttonStateProgress = FloatPropKey()
 
 @Composable
 fun NeomorphButton(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    enableAnimation: Boolean = true,
 ) {
     val buttonState = remember { mutableStateOf(ButtonState.IDLE) }
     val fromState = if(buttonState.value == ButtonState.IDLE) {
@@ -63,8 +65,8 @@ fun NeomorphButton(
 
     CircleNeomorph(state = state, modifier = modifier
             .pressIndicatorGestureFilter(
-                    onStart = { buttonState.value = ButtonState.PRESSED },
-                    onStop = { buttonState.value = ButtonState.IDLE }
+                    onStart = { if(enableAnimation) buttonState.value = ButtonState.PRESSED },
+                    onStop = { if(enableAnimation) buttonState.value = ButtonState.IDLE }
             )
     )
 }
@@ -74,39 +76,45 @@ fun CircleNeomorph(
         state: TransitionState,
         modifier: Modifier = Modifier,
 ) {
-    val bias = (3 - 2f * state[buttonStateProgress])
+    val bias = (3 - 2f * state[buttonStateProgress]) * 0.4f
 
-    Box(modifier = modifier.size(size = 200.dp)) {
-        Box(modifier = Modifier.size(120.dp)
-                .clip(shape = CircleShape)
-                .background(
-                        brush = RadialGradient(
-                                colors = listOf(NeomorphLightColor, NeomorphLightColor, Color.Transparent),
-                                radius = 120.dp.value,
-                                centerX = 120.dp.value,
-                                centerY = 120.dp.value
-                        )
-                )
-                .align(alignment = BiasAlignment(bias * -0.1f, bias * -0.1f))
-        )
+    WithConstraints(modifier = modifier) {
+        val w = this.maxWidth
+        val centerSize = (w * 5f/7)
+        val shadowSize = (w * 6f/7)
 
-        Box(modifier = Modifier.size(120.dp)
-                .clip(shape = CircleShape)
-                .background(
-                        brush = RadialGradient(
-                                colors = listOf(NeomorphDarkColor, NeomorphDarkColor, Color.Transparent),
-                                radius = 120.dp.value,
-                                centerX = 120.dp.value,
-                                centerY = 120.dp.value
-                        )
-                )
-                .align(alignment = BiasAlignment(bias * 0.1f, bias * 0.1f))
-        )
+        Box(modifier = modifier) {
+            Box(modifier = Modifier.size(size = shadowSize)
+                    .clip(shape = CircleShape)
+                    .background(
+                            brush = RadialGradient(
+                                    colors = listOf(NeomorphLightColor, NeomorphLightColor, Color.Transparent),
+                                    radius = shadowSize.value,
+                                    centerX = shadowSize.value,
+                                    centerY = shadowSize.value
+                            )
+                    )
+                    .align(alignment = BiasAlignment(-bias, -bias))
+            )
 
-        Box(modifier = Modifier.size(size = 100.dp)
-                .clip(shape = CircleShape)
-                .align(alignment = Alignment.Center)
-                .background(color = NeomorphColor))
+            Box(modifier = Modifier.size(size = shadowSize)
+                    .clip(shape = CircleShape)
+                    .background(
+                            brush = RadialGradient(
+                                    colors = listOf(NeomorphDarkColor, NeomorphDarkColor, Color.Transparent),
+                                    radius = shadowSize.value,
+                                    centerX = shadowSize.value,
+                                    centerY = shadowSize.value
+                            )
+                    )
+                    .align(alignment = BiasAlignment(bias, bias))
+            )
+
+            Box(modifier = Modifier.size(size = centerSize)
+                    .clip(shape = CircleShape)
+                    .align(alignment = Alignment.Center)
+                    .background(color = NeomorphColor))
+        }
     }
 }
 
@@ -118,6 +126,7 @@ fun PreviewNeomorphButton() {
             .fillMaxSize()) {
         NeomorphButton(
                 modifier = Modifier.align(alignment = Alignment.Center)
+                        .size(size = 400.dp)
         )
     }
 

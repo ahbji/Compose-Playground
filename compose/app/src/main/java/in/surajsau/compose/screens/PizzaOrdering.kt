@@ -81,6 +81,14 @@ fun PizzaOrdering(modifier: Modifier = Modifier) {
                 }
             }, initState = buttonState.value, toState = toState)
 
+            NeomorphButton(
+                    enableAnimation = false,
+                    modifier = Modifier
+                            .size(size = w * 0.95f)
+                            .offset(x = 50.dp)
+                            .align(alignment = Alignment.CenterEnd)
+            )
+
             AddButton(
                     state = state,
                     onClick = { buttonState.value = (buttonState.value + 1) % 2 },
@@ -198,5 +206,5 @@ fun ToppingScrollItem(
 @Preview
 @Composable
 fun previewPizzaOrdering() {
-    PizzaOrdering(modifier = Modifier.fillMaxSize())
+    PizzaOrdering(modifier = Modifier.fillMaxSize().background(color = NeomorphColor))
 }
