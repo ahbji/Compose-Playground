@@ -4,28 +4,24 @@ import androidx.compose.animation.animatedColor
 import androidx.compose.animation.animatedFloat
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.ConstraintLayout
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.gesture.Direction
+import androidx.compose.ui.gesture.DragObserver
+import androidx.compose.ui.gesture.dragGestureFilter
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.StrokeCap
-import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 // https://dribbble.com/shots/3959132-Todo-List-Swipe-To-Check
+
+// TODO: curve the right bottom half side when dragging
 
 val strikeColor = Color(0xFF04B7FE)
 val strikeTextColor = Color(0xFF15CBF2)
@@ -37,17 +33,75 @@ fun TodoListItem(
         modifier: Modifier = Modifier,
         onStrikeChange: ((Boolean) -> Unit)? = null
 ) {
-    ConstraintLayout(modifier = modifier) {
-        var isStrikeThrough = remember { false }
-        val (strike, textField, tick) = createRefs()
 
-        val headAnimation = animatedFloat(initVal = 0f)
-        val tailAnimation = animatedFloat(initVal = 0f)
+    val drag = remember { mutableStateOf(0f) }
 
-        val tickHeadAnimation = animatedFloat(initVal = 0f)
-        val tickTailAnimation = animatedFloat(initVal = 0f)
+    val headAnimation = animatedFloat(initVal = 0f)
+    val tailAnimation = animatedFloat(initVal = 0f)
 
-        val textColor = animatedColor(initVal = normalTextColor)
+    val tickHeadAnimation = animatedFloat(initVal = 0f)
+    val tickTailAnimation = animatedFloat(initVal = 0f)
+
+    val textColor = animatedColor(initVal = normalTextColor)
+
+    ConstraintLayout(
+            modifier = modifier
+                    .dragGestureFilter(object : DragObserver {
+                        override fun onDrag(dragDistance: Offset): Offset {
+                            drag.value += dragDistance.x
+
+                            if(drag.value < 200f) {
+                                headAnimation.snapTo(targetValue = (drag.value) / 500f)
+                                tailAnimation.snapTo(targetValue = (drag.value) / 500f)
+                            } else {
+                                headAnimation.animateTo(
+                                        targetValue = 1f,
+                                        anim = tween(
+                                                durationMillis = 1000,
+                                                easing = LinearEasing
+                                        )
+                                )
+
+                                tailAnimation.animateTo(
+                                        targetValue = 1f,
+                                        anim = tween(
+                                                durationMillis = 500,
+                                                easing = LinearEasing
+                                        )
+                                )
+
+                                textColor.animateTo(
+                                        targetValue = strikeTextColor,
+                                        anim = tween(
+                                                durationMillis = 300,
+                                                delayMillis = 700,
+                                                easing = LinearEasing
+                                        )
+                                )
+
+                                tickHeadAnimation.animateTo(
+                                        targetValue = 1f,
+                                        anim = tween(
+                                                delayMillis = 600,
+                                                durationMillis = 500,
+                                                easing = LinearEasing
+                                        )
+                                )
+
+                                tickTailAnimation.animateTo(
+                                        targetValue = 1f,
+                                        anim = tween(
+                                                delayMillis = 600,
+                                                durationMillis = 500,
+                                                easing = LinearEasing
+                                        )
+                                )
+                            }
+                            return super.onDrag(dragDistance)
+                        }
+                    }, canDrag = { it == Direction.RIGHT })
+    ) {
+        val (strike, textField, tick) = remember { createRefs() }
 
         Text(text = text,
                 fontSize = 20.sp,
@@ -57,33 +111,7 @@ fun TodoListItem(
                     start.linkTo(parent.start, margin = 60.dp)
                     top.linkTo(strike.top)
                     bottom.linkTo(strike.bottom)
-                }.clickable(onClick = {
-                    isStrikeThrough = !isStrikeThrough
-                    headAnimation.animateTo(
-                            targetValue = if(isStrikeThrough) 1f else 0f,
-                            anim = tween(durationMillis = 1000, easing = LinearEasing)
-                    )
-
-                    tailAnimation.animateTo(
-                            targetValue = if(isStrikeThrough) 1f else 0f,
-                            anim = tween(durationMillis = 500, easing = LinearEasing)
-                    )
-
-                    textColor.animateTo(
-                            targetValue = if(isStrikeThrough) strikeTextColor else normalTextColor,
-                            anim = tween(durationMillis = 300, delayMillis = 700, easing = LinearEasing)
-                    )
-
-                    tickHeadAnimation.animateTo(
-                            targetValue = if(isStrikeThrough) 1f else 0f,
-                            anim = tween(delayMillis = 600, durationMillis = 500, easing = LinearEasing)
-                    )
-
-                    tickTailAnimation.animateTo(
-                            targetValue = if(isStrikeThrough) 1f else 0f,
-                            anim = tween(delayMillis = 600, durationMillis = 500, easing = LinearEasing)
-                    )
-                })
+                }
         )
         
         Strike(
