@@ -1,8 +1,11 @@
 package `in`.surajsau.compose.todo
 
+import androidx.compose.animation.animate
 import androidx.compose.animation.animatedColor
 import androidx.compose.animation.animatedFloat
 import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.ConstraintLayout
 import androidx.compose.material.Text
@@ -35,6 +38,7 @@ fun TodoListItem(
 ) {
 
     val drag = remember { mutableStateOf(0f) }
+    val springProgress = remember { mutableStateOf(0f) }
 
     val headAnimation = animatedFloat(initVal = 0f)
     val tailAnimation = animatedFloat(initVal = 0f)
@@ -43,6 +47,11 @@ fun TodoListItem(
     val tickTailAnimation = animatedFloat(initVal = 0f)
 
     val textColor = animatedColor(initVal = normalTextColor)
+
+    val textSpringDrag = animate(
+            target = if(drag.value > 100f) 1f else 0f,
+            animSpec = spring(Spring.DampingRatioHighBouncy, 700f)
+    )
 
     ConstraintLayout(
             modifier = modifier
@@ -108,7 +117,7 @@ fun TodoListItem(
                 fontWeight = FontWeight.Medium,
                 color = textColor.value,
                 modifier = Modifier.constrainAs(textField) {
-                    start.linkTo(parent.start, margin = 60.dp)
+                    start.linkTo(parent.start, margin = 60.dp + (textSpringDrag.dp) * 8)
                     top.linkTo(strike.top)
                     bottom.linkTo(strike.bottom)
                 }
