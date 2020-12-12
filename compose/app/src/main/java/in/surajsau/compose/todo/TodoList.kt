@@ -84,18 +84,22 @@ fun StrikeAnimation(modifier: Modifier = Modifier) {
         
         Strike(
                 color = strikeColor,
-                strokeWidth = 4f,
+                strokeWidth = 3f,
+                curveRadius = 4.dp,
+                sideLength = 24.dp,
                 headAnimation = headAnimation.value,
                 tailAnimation = tailAnimation.value,
                 modifier = Modifier
                         .constrainAs(strike) {
                             top.linkTo(parent.top)
-                            start.linkTo(parent.start)
+                            start.linkTo(parent.start, margin = 20.dp)
                             end.linkTo(parent.end)
                         }
         )
 
         TickAnimation(
+                sparkleRadius = 40.dp,
+                tickSize = 15.dp,
                 color = strikeColor,
                 headAnimation = tickHeadAnimation.value,
                 tailAnimation = tickTailAnimation.value,

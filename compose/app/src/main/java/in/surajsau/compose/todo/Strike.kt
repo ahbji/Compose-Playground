@@ -20,7 +20,6 @@ fun Strike(
         modifier: Modifier = Modifier,
         curveRadius: Dp = 4.dp,
         sideLength: Dp = 24.dp,
-        padding: PaddingValues = PaddingValues(start = 16.dp),
         strokeWidth: Float = 6f,
         headAnimation: Float,
         tailAnimation: Float,
@@ -32,7 +31,7 @@ fun Strike(
 
         val height = size.height
 
-        val left = padding.start.toPx()
+        val left = 0f
         val right = left + sideLength.toPx()
         val top = height/2 - sideLength.toPx()/2
         val bottom = height/2 + sideLength.toPx()/2
