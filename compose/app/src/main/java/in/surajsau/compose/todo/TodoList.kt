@@ -1,5 +1,6 @@
 package `in`.surajsau.compose.todo
 
+import androidx.compose.animation.animatedColor
 import androidx.compose.animation.animatedFloat
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
@@ -26,6 +27,10 @@ import androidx.compose.ui.unit.sp
 
 // https://dribbble.com/shots/3959132-Todo-List-Swipe-To-Check
 
+val strikeColor = Color(0xFF04B7FE)
+val strikeTextColor = Color(0xFF15CBF2)
+val normalTextColor = Color(0xFF31595D)
+
 @Composable
 fun StrikeAnimation(modifier: Modifier = Modifier) {
     ConstraintLayout(modifier = modifier) {
@@ -34,32 +39,16 @@ fun StrikeAnimation(modifier: Modifier = Modifier) {
 
         val headAnimation = animatedFloat(initVal = 0f)
         val tailAnimation = animatedFloat(initVal = 0f)
-        
-        Strike(
-                headAnimation = headAnimation.value,
-                tailAnimation = tailAnimation.value,
-                modifier = Modifier
-                        .constrainAs(strike) {
-                            top.linkTo(parent.top)
-                            start.linkTo(parent.start)
-                            end.linkTo(parent.end)
-                        }
-        )
 
-        TickAnimation(
-                headAnimation = 1f,
-                tailAnimation = 1f,
-                modifier = Modifier
-                        .constrainAs(tick) {
-                            start.linkTo(strike.start)
-                            top.linkTo(strike.top)
-                            bottom.linkTo(strike.bottom)
-                        }
-        )
-        
+        val tickHeadAnimation = animatedFloat(initVal = 0f)
+        val tickTailAnimation = animatedFloat(initVal = 0f)
+
+        val textColor = animatedColor(initVal = normalTextColor)
+
         Text(text = "Do an important task",
                 fontSize = 20.sp,
-                fontWeight = FontWeight.Bold,
+                fontWeight = FontWeight.Medium,
+                color = textColor.value,
                 modifier = Modifier.constrainAs(text) {
                     start.linkTo(parent.start, margin = 60.dp)
                     top.linkTo(strike.top)
@@ -73,9 +62,49 @@ fun StrikeAnimation(modifier: Modifier = Modifier) {
 
                     tailAnimation.animateTo(
                             targetValue = if(isStrikeThrough) 1f else 0f,
-                            anim = tween(durationMillis = 1000, easing = LinearEasing)
+                            anim = tween(durationMillis = 500, easing = LinearEasing)
+                    )
+
+                    textColor.animateTo(
+                            targetValue = if(isStrikeThrough) strikeTextColor else normalTextColor,
+                            anim = tween(durationMillis = 300, delayMillis = 700, easing = LinearEasing)
+                    )
+
+                    tickHeadAnimation.animateTo(
+                            targetValue = if(isStrikeThrough) 1f else 0f,
+                            anim = tween(delayMillis = 600, durationMillis = 500, easing = LinearEasing)
+                    )
+
+                    tickTailAnimation.animateTo(
+                            targetValue = if(isStrikeThrough) 1f else 0f,
+                            anim = tween(delayMillis = 600, durationMillis = 500, easing = LinearEasing)
                     )
                 })
+        )
+        
+        Strike(
+                color = strikeColor,
+                strokeWidth = 4f,
+                headAnimation = headAnimation.value,
+                tailAnimation = tailAnimation.value,
+                modifier = Modifier
+                        .constrainAs(strike) {
+                            top.linkTo(parent.top)
+                            start.linkTo(parent.start)
+                            end.linkTo(parent.end)
+                        }
+        )
+
+        TickAnimation(
+                color = strikeColor,
+                headAnimation = tickHeadAnimation.value,
+                tailAnimation = tickTailAnimation.value,
+                modifier = Modifier
+                        .constrainAs(tick) {
+                            start.linkTo(strike.start)
+                            top.linkTo(strike.top)
+                            bottom.linkTo(strike.bottom)
+                        }
         )
     }
 }

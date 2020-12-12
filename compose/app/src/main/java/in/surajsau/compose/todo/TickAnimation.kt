@@ -22,6 +22,7 @@ import kotlin.math.sin
 
 @Composable
 fun TickAnimation(
+        color: Color,
         headAnimation: Float,
         tailAnimation: Float,
         modifier: Modifier = Modifier
@@ -31,7 +32,7 @@ fun TickAnimation(
             .height(100.dp)
     ) {
         drawLine(
-                color = Color.Red,
+                color = color,
                 start = Offset(
                         26.dp.toPx() + (4.dp.toPx() * headAnimation),
                         46.dp.toPx() + (4.dp.toPx() * headAnimation),
@@ -46,7 +47,7 @@ fun TickAnimation(
 
         if(tailAnimation >= 0.3)
             drawLine(
-                    color = Color.Red,
+                    color = color,
                     start = Offset(
                             34.dp.toPx(),
                             54.dp.toPx()
@@ -59,16 +60,16 @@ fun TickAnimation(
                     cap = StrokeCap.Round
             )
 
-        if(tailAnimation >= 0.4)
+        if(tailAnimation >= 0.3)
             (1..10).forEach {
                 val angle = 2 * Math.PI * it/10
                 drawCircle(
-                        color = Color.Red,
+                        color = color,
                         center = Offset(
-                                38.dp.toPx() + (12.dp.toPx() + (20.dp.toPx() * (tailAnimation - 0.4f) * 2.5f)) * sin(angle).toFloat(),
-                                46.dp.toPx() + (12.dp.toPx() + (20.dp.toPx() * (tailAnimation - 0.4f) * 2.5f)) * cos(angle).toFloat()
+                                38.dp.toPx() + (27.dp.toPx() + (5.dp.toPx() * (tailAnimation - 0.3f) * 3.33f)) * sin(angle).toFloat(),
+                                46.dp.toPx() + (27.dp.toPx() + (5.dp.toPx() * (tailAnimation - 0.3f) * 3.33f)) * cos(angle).toFloat()
                         ),
-                        radius = 6f - (6f * (tailAnimation - 0.5f) * 2.5f)
+                        radius = 5f - (5f * (tailAnimation - 0.3f) * 3.33f)
                 )
             }
     }
@@ -81,6 +82,7 @@ fun previewTickAnimation() {
         val head = animatedFloat(initVal = 0f)
         val tail = animatedFloat(initVal = 0f)
         TickAnimation(
+                color = Color.Black,
                 headAnimation = head.value,
                 tailAnimation = tail.value,
                 modifier = Modifier.align(alignment = Alignment.Center)
