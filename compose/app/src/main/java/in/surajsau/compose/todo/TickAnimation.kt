@@ -48,27 +48,28 @@ fun TickAnimation(
         val tickMiddle = Pair(tickLeft + tickSize/3, tickBottom)
         val tickEnd = Pair(tickRight, tickTop)
 
-        drawLine(
-                color = color,
-                start = Offset(
-                        x = tickStart.first.toPx(),
-                        y = tickStart.second.toPx()
-                ),
-                end = Offset(
-                        x = if(tailAnimation < 0.3f) {
-                            (tickStart.first + (tickMiddle.first - tickStart.first) * tailAnimation * 3.33f).toPx()
-                        } else {
-                            tickMiddle.first.toPx()
-                        },
-                        y = if(tailAnimation < 0.3) {
-                            (tickStart.second + (tickMiddle.second - tickStart.second) * tailAnimation * 3.33f).toPx()
-                        } else {
-                            tickMiddle.second.toPx()
-                        }
-                ),
-                strokeWidth = strokeWidth,
-                cap = StrokeCap.Round
-        )
+        if(tailAnimation > 0f)
+            drawLine(
+                    color = color,
+                    start = Offset(
+                            x = tickStart.first.toPx(),
+                            y = tickStart.second.toPx()
+                    ),
+                    end = Offset(
+                            x = if(tailAnimation < 0.3f) {
+                                (tickStart.first + (tickMiddle.first - tickStart.first) * tailAnimation * 3.33f).toPx()
+                            } else {
+                                tickMiddle.first.toPx()
+                            },
+                            y = if(tailAnimation < 0.3) {
+                                (tickStart.second + (tickMiddle.second - tickStart.second) * tailAnimation * 3.33f).toPx()
+                            } else {
+                                tickMiddle.second.toPx()
+                            }
+                    ),
+                    strokeWidth = strokeWidth,
+                    cap = StrokeCap.Round
+            )
 
         if(tailAnimation >= 0.3)
             drawLine(
