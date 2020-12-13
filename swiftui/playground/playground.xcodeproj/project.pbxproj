@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F2589332584E3C60073CC0C /* Strike.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2589322584E3C60073CC0C /* Strike.swift */; };
 		4F8693E5257F9BC000F16592 /* playgroundApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8693E4257F9BC000F16592 /* playgroundApp.swift */; };
 		4F8693E7257F9BC000F16592 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8693E6257F9BC000F16592 /* ContentView.swift */; };
 		4F8693E9257F9BC400F16592 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F8693E8257F9BC400F16592 /* Assets.xcassets */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4F2589322584E3C60073CC0C /* Strike.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strike.swift; sourceTree = "<group>"; };
 		4F8693E1257F9BC000F16592 /* playground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = playground.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F8693E4257F9BC000F16592 /* playgroundApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = playgroundApp.swift; sourceTree = "<group>"; };
 		4F8693E6257F9BC000F16592 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -37,6 +39,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F2589312584E3970073CC0C /* todo */ = {
+			isa = PBXGroup;
+			children = (
+				4F2589322584E3C60073CC0C /* Strike.swift */,
+			);
+			path = todo;
+			sourceTree = "<group>";
+		};
 		4F8693D8257F9BC000F16592 = {
 			isa = PBXGroup;
 			children = (
@@ -56,6 +66,7 @@
 		4F8693E3257F9BC000F16592 /* playground */ = {
 			isa = PBXGroup;
 			children = (
+				4F2589312584E3970073CC0C /* todo */,
 				4F869400257FBB6500F16592 /* learn */,
 				4F8693F4257F9BE900F16592 /* parallax */,
 				4F8693E4257F9BC000F16592 /* playgroundApp.swift */,
@@ -163,6 +174,7 @@
 				4F8693E7257F9BC000F16592 /* ContentView.swift in Sources */,
 				4F8693F6257F9C0100F16592 /* ParallaxScroll.swift in Sources */,
 				4F869402257FBB7900F16592 /* GeometryReaderTutorial.swift in Sources */,
+				4F2589332584E3C60073CC0C /* Strike.swift in Sources */,
 				4F8693E5257F9BC000F16592 /* playgroundApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
