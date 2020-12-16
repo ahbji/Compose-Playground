@@ -13,7 +13,7 @@
 		4F8693E9257F9BC400F16592 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F8693E8257F9BC400F16592 /* Assets.xcassets */; };
 		4F8693EC257F9BC400F16592 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F8693EB257F9BC400F16592 /* Preview Assets.xcassets */; };
 		4F8693F6257F9C0100F16592 /* ParallaxScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8693F5257F9C0100F16592 /* ParallaxScroll.swift */; };
-		4F869402257FBB7900F16592 /* GeometryReaderTutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F869401257FBB7900F16592 /* GeometryReaderTutorial.swift */; };
+		4FA422BA258A121600BE2B41 /* ScrollOffsetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA422B9258A121600BE2B41 /* ScrollOffsetView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,7 +25,7 @@
 		4F8693EB257F9BC400F16592 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4F8693ED257F9BC400F16592 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F8693F5257F9C0100F16592 /* ParallaxScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallaxScroll.swift; sourceTree = "<group>"; };
-		4F869401257FBB7900F16592 /* GeometryReaderTutorial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryReaderTutorial.swift; sourceTree = "<group>"; };
+		4FA422B9258A121600BE2B41 /* ScrollOffsetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollOffsetView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,8 +66,8 @@
 		4F8693E3257F9BC000F16592 /* playground */ = {
 			isa = PBXGroup;
 			children = (
+				4FA422B8258A120600BE2B41 /* swiftui */,
 				4F2589312584E3970073CC0C /* todo */,
-				4F869400257FBB6500F16592 /* learn */,
 				4F8693F4257F9BE900F16592 /* parallax */,
 				4F8693E4257F9BC000F16592 /* playgroundApp.swift */,
 				4F8693E6257F9BC000F16592 /* ContentView.swift */,
@@ -94,12 +94,12 @@
 			path = parallax;
 			sourceTree = "<group>";
 		};
-		4F869400257FBB6500F16592 /* learn */ = {
+		4FA422B8258A120600BE2B41 /* swiftui */ = {
 			isa = PBXGroup;
 			children = (
-				4F869401257FBB7900F16592 /* GeometryReaderTutorial.swift */,
+				4FA422B9258A121600BE2B41 /* ScrollOffsetView.swift */,
 			);
-			path = learn;
+			path = swiftui;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -171,9 +171,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FA422BA258A121600BE2B41 /* ScrollOffsetView.swift in Sources */,
 				4F8693E7257F9BC000F16592 /* ContentView.swift in Sources */,
 				4F8693F6257F9C0100F16592 /* ParallaxScroll.swift in Sources */,
-				4F869402257FBB7900F16592 /* GeometryReaderTutorial.swift in Sources */,
 				4F2589332584E3C60073CC0C /* Strike.swift in Sources */,
 				4F8693E5257F9BC000F16592 /* playgroundApp.swift in Sources */,
 			);

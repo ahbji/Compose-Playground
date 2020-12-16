@@ -15,30 +15,25 @@ let Items = [
     Item(title: "Mizutsune", subTitle: "タミツネ", image: "mizutsune")
 ]
 
-private struct ScrollOffsetPrefKey: PreferenceKey {
-    static var defaultValue: CGPoint = .zero
-    
-    static func reduce(value: inout CGPoint, nextValue: () -> CGPoint) {
-        value = nextValue()
-    }
-}
-
 
 
 struct ParallaxScroll: View {
+    @State private var scrollOffset: CGPoint = .zero
     
     var body: some View {
-        GeometryReader { view in
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
-                    ForEach(Items, id: \.self) { item in
-                        CardView(scrollx: view.frame(in: .global).minX, item: item)
-                            .padding()
-                    }
-                }
-            }
+        ZStack {
+//            ScrollView(
+//                axes: .horizontal,
+//                showsIndicators: false,
+//                offsetChanged: { scrollOffset = $0 }
+//            ) {
+//                ForEach(Items, id: \.self) { item in
+//                    CardView(scrollx: 0.0, item: item)
+//                        .padding()
+//                }
+//            }
+            Text("\(scrollOffset.y)")
         }
-        
     }
 }
 
@@ -48,43 +43,46 @@ struct CardView: View {
     
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 20.0, style: .continuous)
-                .fill(Color.white)
-            
-            VStack {
-                Image(item.image)
-                    .scaledToFill()
-                    .frame(width: 350, height: 400, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    .offset(x: scrollx, y: 0.0)
-                    .clipped()
-                
-                HStack {
-                    Text(item.title)
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .padding(.leading, 16.0)
-                    
-                    Spacer()
-                }
-                
-                
-                HStack {
-                    Text(item.subTitle)
-                        .font(.subheadline)
-                        .fontWeight(.medium)
-                        .multilineTextAlignment(.leading)
-                        .padding(.leading, 16.0)
-                        .padding(.top, 8.0)
-                    
-                    Spacer()
-                }
-                
-                Spacer()
-                
-            }
+            self.cardContent
         }
         .frame(width: 350, height: 500, alignment: .leading)
         .shadow(radius: 10)
+    }
+    
+    var cardContent: some View {
+        VStack {
+            Image(item.image)
+                .scaledToFill()
+                .frame(width: 350, height: 400, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                .offset(x: scrollx, y: 0.0)
+                .clipped()
+            
+            HStack {
+                Text(item.title)
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .padding(.leading, 16.0)
+                
+                Spacer()
+            }
+            
+            
+            HStack {
+                Text(item.subTitle)
+                    .font(.subheadline)
+                    .fontWeight(.medium)
+                    .multilineTextAlignment(.leading)
+                    .padding(.leading, 16.0)
+                    .padding(.top, 8.0)
+                
+                Spacer()
+            }
+            
+            Spacer()
+            
+        }
+        .background(Color.white)
+        .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
     }
 }
 
