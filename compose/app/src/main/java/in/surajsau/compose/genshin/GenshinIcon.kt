@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
 import `in`.surajsau.compose.R
+import androidx.compose.foundation.background
 
 @Composable
 fun GenshinIcon(
@@ -30,24 +31,32 @@ fun GenshinIcon(
 ) {
     Box(modifier = Modifier.size(size = size)) {
         Canvas(modifier = Modifier.fillMaxSize()) {
-            drawImage(
-                    image = image,
-                    dstSize = IntSize(
-                            width = size.toIntPx(),
-                            height = size.toIntPx()
-                    ),
+            drawIntoCanvas {
+                it.saveLayer(
+                        bounds = Rect(offset = Offset.Zero,
+                                size = Size(width = size.toPx(), height = size.toPx())),
+                        paint = Paint()
+                )
+                val imagePaint = Paint().apply {
                     colorFilter = ColorFilter.tint(
                             color = defaultColor
-                    ),
-                    blendMode = BlendMode.Src
-            )
-            drawIntoCanvas {
+                    )
+                    blendMode = BlendMode.SrcOver
+                }
                 val paint = Paint().apply {
                     color = progressColor
                     blendMode = BlendMode.SrcIn
                 }
 
-                it.restore()
+                it.drawImageRect(
+                        image = image,
+                        paint = imagePaint,
+                        dstSize = IntSize(
+                                width = size.toIntPx(),
+                                height = size.toIntPx()
+                        )
+                )
+
                 it.drawRect(
                         rect = Rect(
                                 offset = Offset.Zero,
@@ -58,7 +67,7 @@ fun GenshinIcon(
                         ),
                         paint = paint
                 )
-                it.save()
+                it.restore()
             }
         }
     }
@@ -67,9 +76,11 @@ fun GenshinIcon(
 @Preview
 @Composable
 fun previewIcon() {
-    GenshinIcon(
-            fraction = 0.5f,
-            image = imageResource(id = R.drawable.hydro),
-            size = 100.dp
-    )
+    Box(modifier = Modifier.size(120.dp).background(Color.White)) {
+        GenshinIcon(
+                fraction = 0.5f,
+                image = imageResource(id = R.drawable.hydro),
+                size = 100.dp
+        )
+    }
 }
