@@ -1,5 +1,6 @@
 [
   {
+    "id": "todo",
     "title": "Todo List (Swipe To Check)",
     "url": "https://dribbble.com/shots/3959132-Todo-List-Swipe-To-Check",
     "type": "Dribble",
@@ -8,6 +9,7 @@
     "wip": true
   },
   {
+    "id": "music_player",
     "title": "Music Player",
     "url": "https://dribbble.com/shots/4240318-Made-with-InVision-Studio-Music-Player",
     "type": "Dribble",
@@ -16,6 +18,7 @@
     "wip": true
   },
   {
+    "id": "parallax_scroll",
     "title": "Parallax Scroll",
     "url": "https://dribbble.com/shots/3917248-Mobile-App-Prototype-in-InVision-Studio",
     "type": "Inspired",
@@ -24,6 +27,7 @@
     "wip": false
   },
   {
+    "id": "g_fonts",
     "title": "Google Fonts",
     "url": "https://dribbble.com/shots/2779833-Google-Fonts",
     "type": "Dribble",
@@ -32,10 +36,20 @@
     "wip": true
   },
   {
+    "id": "pizza_kit",
     "title": "Pizza kit | Mobile App",
     "url": "https://dribbble.com/shots/14717737-Pizza-kit-Mobile-App",
     "type": "Dribble",
     "author": "Ksenia Butyrina",
+    "image": "",
+    "wip": true
+  },
+  {
+    "id": "neomorph",
+    "title": "Neomorphism",
+    "url": "",
+    "type": "Inspired",
+    "author": "..",
     "image": "",
     "wip": true
   }

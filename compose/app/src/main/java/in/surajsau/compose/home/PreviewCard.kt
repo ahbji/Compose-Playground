@@ -62,6 +62,7 @@ fun ItemCard(
 fun PreviewItemCard() {
     ItemCard(
         item = ScreenData(
+            id = "123",
             title = "title",
             url = "https://google.com",
             author = "author",
