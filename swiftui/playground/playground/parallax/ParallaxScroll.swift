@@ -22,16 +22,14 @@ struct ParallaxScroll: View {
     
     var body: some View {
         ZStack {
-//            ScrollView(
-//                axes: .horizontal,
-//                showsIndicators: false,
-//                offsetChanged: { scrollOffset = $0 }
-//            ) {
-//                ForEach(Items, id: \.self) { item in
-//                    CardView(scrollx: 0.0, item: item)
-//                        .padding()
-//                }
-//            }
+            ScrollView(
+                offsetChanged: { scrollOffset = $0 }
+            ) {
+                ForEach(Items, id: \.self) { item in
+                    CardView(scrollx: 0.0, item: item)
+                        .padding()
+                }
+            }
             Text("\(scrollOffset.y)")
         }
     }

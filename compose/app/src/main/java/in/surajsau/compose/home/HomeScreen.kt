@@ -1,37 +1,30 @@
 package `in`.surajsau.compose.home
 
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.lazy.LazyColumnFor
+import `in`.surajsau.compose.androidx.LazyGrid
+import `in`.surajsau.compose.data.ScreenData
+import `in`.surajsau.compose.data.ScreenDataRepository
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.onCommit
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun HomeScreen() {
-    val list = listOf(
-            Item("Title1"),
-            Item("Title2"),
-            Item("Title3"),
-            Item("Title4"),
-            Item("Title5"),
-            Item("Title6"),
-            Item("Title7")
-    )
-    Row {
-        LazyColumnFor(
-                items = list.filterIndexed { index, _ -> index % 2 == 0 },
-                modifier = Modifier
-        ) { item ->
-            ItemCard(item = item)
-        }
+fun HomeScreen(modifier: Modifier = Modifier) {
 
-        LazyColumnFor(
-                items = list.filterIndexed { index, _ -> index % 2 == 1 },
-                modifier = Modifier
-        ) { item ->
-            ItemCard(item = item)
+    val list = remember { mutableStateListOf<ScreenData>() }
+
+    onCommit {
+        ScreenDataRepository().watchScreens {
+            list.addAll(it)
         }
+    }
+
+    LazyGrid(items = list, rowSize = 2) { item ->
+        ItemCard(item = item)
     }
 }
 
@@ -39,6 +32,6 @@ fun HomeScreen() {
 @Preview
 private fun PreviewHomeScreen() {
     MaterialTheme {
-        HomeScreen()
+        HomeScreen(modifier = Modifier.fillMaxSize())
     }
 }

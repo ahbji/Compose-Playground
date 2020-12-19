@@ -1,5 +1,6 @@
 package `in`.surajsau.compose
 
+import `in`.surajsau.compose.home.HomeScreen
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Text
@@ -17,22 +18,9 @@ class MainActivity : AppCompatActivity() {
             ComposeTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    Greeting("Android")
+                    HomeScreen()
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    ComposeTheme {
-        Greeting("Android")
     }
 }
