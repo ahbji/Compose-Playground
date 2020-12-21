@@ -1,4 +1,4 @@
-package `in`.surajsau.compose.todo
+package `in`.surajsau.compose.screens.todo
 
 import androidx.compose.animation.animatedFloat
 import androidx.compose.animation.core.LinearEasing

@@ -1,4 +1,4 @@
-package `in`.surajsau.compose.todo
+package `in`.surajsau.compose.screens.todo
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.PaddingValues

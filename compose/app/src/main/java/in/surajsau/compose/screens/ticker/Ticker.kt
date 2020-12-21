@@ -1,4 +1,4 @@
-package `in`.surajsau.compose.ticker
+package `in`.surajsau.compose.screens.ticker
 
 import androidx.compose.animation.core.FloatPropKey
 import androidx.compose.animation.core.LinearEasing

@@ -5,7 +5,7 @@ import `in`.surajsau.compose.screens.GoogleFonts
 import `in`.surajsau.compose.screens.MusicPlayer
 import `in`.surajsau.compose.screens.NeomorphButton
 import `in`.surajsau.compose.screens.Parallax
-import `in`.surajsau.compose.todo.TodoList
+import `in`.surajsau.compose.screens.todo.TodoList
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Text

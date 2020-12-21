@@ -1,4 +1,4 @@
-package `in`.surajsau.compose.todo
+package `in`.surajsau.compose.screens.todo
 
 import androidx.compose.animation.animate
 import androidx.compose.animation.animatedColor

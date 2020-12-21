@@ -1,4 +1,4 @@
-package `in`.surajsau.compose.ticker
+package `in`.surajsau.compose.screens.ticker
 
 import `in`.surajsau.compose.androidx.RadialShadow
 import `in`.surajsau.compose.androidx.Size
