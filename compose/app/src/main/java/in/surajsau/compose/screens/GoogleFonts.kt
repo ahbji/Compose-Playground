@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Text
-import androidx.compose.material.ripple.RippleIndication
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -110,7 +109,7 @@ fun GoogleFontView(
     state: TransitionState,
     onClick: () -> Unit
 ) {
-    Box(modifier = Modifier.clickable(onClick = { onClick.invoke() }, indication = RippleIndication(radius = 0.dp))) {
+    Box(modifier = Modifier.clickable(onClick = { onClick.invoke() })) {
         Box(
             modifier = Modifier.size(size = 100.dp)
                 .drawLayer(rotationZ = state[rotateZ])
