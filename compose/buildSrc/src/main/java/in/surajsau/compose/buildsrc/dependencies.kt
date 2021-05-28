@@ -74,9 +74,10 @@ object Libs {
         }
 
         object Navigation {
-            private const val version = "2.3.4"
+            private const val version = "2.4.0-alpha01"
             const val fragment = "androidx.navigation:navigation-fragment-ktx:$version"
             const val uiKtx = "androidx.navigation:navigation-ui-ktx:$version"
+            const val navigation = "androidx.navigation:navigation-compose:$version"
         }
 
         object Test {
@@ -99,6 +100,10 @@ object Libs {
             const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"
             const val viewModelCompose = "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha04"
         }
+    }
+
+    object External {
+        const val coil = "io.coil-kt:coil:1.2.1"
     }
 }
 

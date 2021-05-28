@@ -60,6 +60,7 @@ dependencies {
     implementation Libs.AndroidX.Lifecycle.viewModelCompose
     implementation Libs.AndroidX.Navigation.fragment
     implementation Libs.AndroidX.Navigation.uiKtx
+    implementation Libs.AndroidX.Navigation.navigation
     implementation Libs.material
 
     implementation Libs.AndroidX.Compose.layout
@@ -73,6 +74,8 @@ dependencies {
     implementation Libs.AndroidX.Compose.constraintLayout
 
     implementation Libs.Accompanist.insets
+
+    implementation Libs.External.coil
 
     androidTestImplementation Libs.junit
     androidTestImplementation Libs.AndroidX.Test.core
