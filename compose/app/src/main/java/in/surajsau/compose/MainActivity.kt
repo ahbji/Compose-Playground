@@ -19,10 +19,5 @@ class MainActivity : AppCompatActivity() {
 
 @Composable
 fun ComposeApp() {
-    val navController = rememberNavController()
-    ComposeTheme {
-        NavHost(navController = navController, startDestination = "home") {
 
-        }
-    }
 }
