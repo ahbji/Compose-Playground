@@ -2,7 +2,9 @@ import in.surajsau.compose.buildsrc.Libs
 
 plugins {
     id 'com.android.application'
+    id 'dagger.hilt.android.plugin'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -52,7 +54,6 @@ dependencies {
     implementation Libs.Kotlin.stdlib
     implementation Libs.Coroutines.android
 
-
     implementation Libs.AndroidX.Activity.activityCompose
     implementation Libs.AndroidX.coreKtx
     implementation Libs.AndroidX.appcompat
@@ -72,6 +73,12 @@ dependencies {
     implementation Libs.AndroidX.Compose.runtimeLivedata
     implementation Libs.AndroidX.Compose.viewBinding
     implementation Libs.AndroidX.Compose.constraintLayout
+
+    implementation Libs.Hilt.android
+    implementation Libs.AndroidX.Hilt.common
+    implementation Libs.AndroidX.Hilt.navigationCompose
+    kapt Libs.Hilt.compiler
+    kapt Libs.AndroidX.Hilt.compiler
 
     implementation Libs.Accompanist.insets
 
