@@ -1,6 +1,7 @@
 package `in`.surajsau.compose.ui.screen
 
 import `in`.surajsau.compose.R
+import `in`.surajsau.compose.model.Samples
 import `in`.surajsau.compose.model.ScreenInformation
 import `in`.surajsau.compose.ui.component.Fab
 import androidx.compose.foundation.layout.Box
@@ -12,13 +13,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun Details(information: ScreenInformation) {
+fun Details(index: Int) {
 
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
 
-        information.content()
+        Samples[index].content()
 
         Fab(
             modifier = Modifier

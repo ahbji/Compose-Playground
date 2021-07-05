@@ -1,5 +1,6 @@
 package `in`.surajsau.compose
 
+import `in`.surajsau.compose.ui.AppContent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.Composable
@@ -12,12 +13,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ComposeApp()
+            AppContent()
         }
     }
-}
-
-@Composable
-fun ComposeApp() {
-
 }
