@@ -3,7 +3,9 @@ package `in`.surajsau.compose.ui.screen
 import `in`.surajsau.compose.model.Samples
 import `in`.surajsau.compose.model.ScreenInformation
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -25,8 +27,11 @@ fun Home(
 
     val samples = remember { Samples }
 
-    LazyColumn {
+    LazyColumn(modifier = Modifier
+        .fillMaxWidth()
+        .padding(start = 16.dp, end = 16.dp)) {
         itemsIndexed(samples) { index, sample ->
+            Spacer(modifier = Modifier.height(8.dp))
             SampleCard(info = sample, onClick = { navigateToDetails.invoke(index) })
         }
     }
@@ -41,7 +46,8 @@ fun SampleCard(
 
     Card(
         onClick = onClick,
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth(),
+        elevation = 4.dp
     ) {
 
         Column(
