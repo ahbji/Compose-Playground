@@ -3,6 +3,8 @@ package `in`.surajsau.compose.model
 import `in`.surajsau.compose.ui.samples.genshin.GenshinScreen
 import `in`.surajsau.compose.ui.samples.neomorph.NeomorphScreen
 import `in`.surajsau.compose.ui.samples.parallax.ParallaxScreen
+import `in`.surajsau.compose.ui.samples.single.GoogleFonts
+import `in`.surajsau.compose.ui.samples.single.GoogleFontsAnimationScreen
 
 val Genshin = ScreenInformation(
     "Genshin Loading",
@@ -25,4 +27,11 @@ val ParallaxCards = ScreenInformation(
     { ParallaxScreen() }
 )
 
-val Samples = listOf(Genshin, NeomorphButton, ParallaxCards)
+val GoogleFontAnimation = ScreenInformation(
+    "Google Font Animation",
+    "Adam Grabowski",
+    "https://dribbble.com/shots/2779833-Google-Fonts",
+    { GoogleFontsAnimationScreen() }
+)
+
+val Samples = listOf(Genshin, NeomorphButton, ParallaxCards, GoogleFontAnimation)
