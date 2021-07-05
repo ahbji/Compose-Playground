@@ -3,6 +3,7 @@ package `in`.surajsau.compose.model
 import `in`.surajsau.compose.ui.samples.genshin.GenshinScreen
 import `in`.surajsau.compose.ui.samples.neomorph.NeomorphScreen
 import `in`.surajsau.compose.ui.samples.parallax.ParallaxScreen
+import `in`.surajsau.compose.ui.samples.single.FeedbackScreen
 import `in`.surajsau.compose.ui.samples.single.GoogleFonts
 import `in`.surajsau.compose.ui.samples.single.GoogleFontsAnimationScreen
 
@@ -34,4 +35,11 @@ val GoogleFontAnimation = ScreenInformation(
     { GoogleFontsAnimationScreen() }
 )
 
-val Samples = listOf(Genshin, NeomorphButton, ParallaxCards, GoogleFontAnimation)
+val FeedbackSlider = ScreenInformation(
+    "Feedback Slider",
+    "--",
+    "--",
+    { FeedbackScreen() }
+)
+
+val Samples = listOf(Genshin, NeomorphButton, ParallaxCards, GoogleFontAnimation, FeedbackSlider)
