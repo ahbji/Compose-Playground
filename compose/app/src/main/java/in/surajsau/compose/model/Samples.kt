@@ -2,6 +2,7 @@ package `in`.surajsau.compose.model
 
 import `in`.surajsau.compose.ui.samples.genshin.GenshinScreen
 import `in`.surajsau.compose.ui.samples.neomorph.NeomorphScreen
+import `in`.surajsau.compose.ui.samples.parallax.ParallaxScreen
 
 val Genshin = ScreenInformation(
     "Genshin Loading",
@@ -17,4 +18,11 @@ val NeomorphButton = ScreenInformation(
     { NeomorphScreen() }
 )
 
-val Samples = listOf(Genshin, NeomorphButton)
+val ParallaxCards = ScreenInformation(
+    "Parallax Cards",
+    "--",
+    "--",
+    { ParallaxScreen() }
+)
+
+val Samples = listOf(Genshin, NeomorphButton, ParallaxCards)
