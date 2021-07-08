@@ -1,5 +1,6 @@
 package `in`.surajsau.compose.model
 
+import `in`.surajsau.compose.ui.samples.creditcards.CreditCardScreen
 import `in`.surajsau.compose.ui.samples.genshin.GenshinScreen
 import `in`.surajsau.compose.ui.samples.neomorph.NeomorphScreen
 import `in`.surajsau.compose.ui.samples.parallax.ParallaxScreen
@@ -42,4 +43,11 @@ val FeedbackSlider = ScreenInformation(
     { FeedbackScreen() }
 )
 
-val Samples = listOf(Genshin, NeomorphButton, ParallaxCards, GoogleFontAnimation, FeedbackSlider)
+val CreditCard = ScreenInformation(
+    "Credit Card view",
+    "--",
+    "--",
+    { CreditCardScreen() }
+)
+
+val Samples = listOf(Genshin, NeomorphButton, ParallaxCards, GoogleFontAnimation, FeedbackSlider, CreditCard)
