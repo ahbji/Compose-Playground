@@ -1,12 +1,12 @@
 package `in`.surajsau.compose.model
 
-import `in`.surajsau.compose.ui.samples.creditcards.CreditCardScreen
 import `in`.surajsau.compose.ui.samples.genshin.GenshinScreen
 import `in`.surajsau.compose.ui.samples.neomorph.NeomorphScreen
 import `in`.surajsau.compose.ui.samples.parallax.ParallaxScreen
 import `in`.surajsau.compose.ui.samples.single.FeedbackScreen
-import `in`.surajsau.compose.ui.samples.single.GoogleFonts
 import `in`.surajsau.compose.ui.samples.single.GoogleFontsAnimationScreen
+import `in`.surajsau.compose.ui.samples.single.RotatingGlobe
+import `in`.surajsau.compose.ui.samples.single.RotatingGlobeScreen
 
 val Genshin = ScreenInformation(
     "Genshin Loading",
@@ -43,11 +43,11 @@ val FeedbackSlider = ScreenInformation(
     { FeedbackScreen() }
 )
 
-val CreditCard = ScreenInformation(
-    "Credit Card view",
+val RotatingGlobe = ScreenInformation(
+    "Rotating Globe",
     "--",
     "--",
-    { CreditCardScreen() }
+    { RotatingGlobeScreen() }
 )
 
-val Samples = listOf(Genshin, NeomorphButton, ParallaxCards, GoogleFontAnimation, FeedbackSlider, CreditCard)
+val Samples = listOf(Genshin, NeomorphButton, ParallaxCards, GoogleFontAnimation, FeedbackSlider, RotatingGlobe)
