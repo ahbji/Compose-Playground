@@ -26,7 +26,7 @@ import kotlin.math.cos
 import kotlin.math.sin
 
 private const val TWO_PI = 2 * Math.PI.toFloat()
-private const val PI_BY_4 = Math.PI.toFloat() / 4
+private const val PI = Math.PI.toFloat()
 
 @Composable
 fun RotatingGlobeScreen() {
@@ -38,6 +38,7 @@ fun RotatingGlobeScreen() {
             .fillMaxHeight(0.5f)
             .padding(16.dp),
             numberOfDots = 1000,
+            inclinationAngle = PI/3
         )
     }
 }
@@ -86,7 +87,7 @@ fun RotatingGlobe(
             val rotationX =
                 x * cos(rotationY + inclinationAngle) + (z + globeRadius) * sin(rotationY + inclinationAngle)
             val rotationZ =
-                -x * sin(rotationY + inclinationAngle) + cos(rotationY + inclinationAngle) * (z + globeRadius)
+                -x * sin(rotationY + inclinationAngle) + cos(rotationY + inclinationAngle) * (z + globeRadius) - globeRadius
 
             val scale = minDimension / (minDimension - rotationZ)
 
