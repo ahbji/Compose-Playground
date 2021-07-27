@@ -5,6 +5,7 @@ import `in`.surajsau.compose.ui.samples.neomorph.NeomorphScreen
 import `in`.surajsau.compose.ui.samples.parallax.ParallaxScreen
 import `in`.surajsau.compose.ui.samples.single.FeedbackScreen
 import `in`.surajsau.compose.ui.samples.single.GoogleFontsAnimationScreen
+import `in`.surajsau.compose.ui.samples.single.OlympicsGlobeScreen
 import `in`.surajsau.compose.ui.samples.single.RotatingGlobe
 import `in`.surajsau.compose.ui.samples.single.RotatingGlobeScreen
 
@@ -50,4 +51,14 @@ val RotatingGlobe = ScreenInformation(
     { RotatingGlobeScreen() }
 )
 
-val Samples = listOf(Genshin, NeomorphButton, ParallaxCards, GoogleFontAnimation, FeedbackSlider, RotatingGlobe)
+val OlympicsGlobe = ScreenInformation(
+    "Olympics Drone Globe",
+    "--",
+    "--",
+    { OlympicsGlobeScreen() }
+)
+
+val Samples = listOf(Genshin, NeomorphButton, ParallaxCards,
+    GoogleFontAnimation, FeedbackSlider, RotatingGlobe,
+    OlympicsGlobe
+)

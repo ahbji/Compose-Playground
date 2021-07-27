@@ -1,6 +1,5 @@
 package `in`.surajsau.compose.ui.samples.single
 
-import android.util.Log
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
