@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4F2589332584E3C60073CC0C /* Strike.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2589322584E3C60073CC0C /* Strike.swift */; };
+		4F056B3E26B50EA300D13DEB /* Globe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F056B3D26B50EA300D13DEB /* Globe.swift */; };
 		4F6C435C258F044D00BCDBC5 /* GenshinLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6C435B258F044D00BCDBC5 /* GenshinLoader.swift */; };
 		4F8693E5257F9BC000F16592 /* playgroundApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8693E4257F9BC000F16592 /* playgroundApp.swift */; };
 		4F8693E7257F9BC000F16592 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8693E6257F9BC000F16592 /* ContentView.swift */; };
@@ -18,7 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4F2589322584E3C60073CC0C /* Strike.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strike.swift; sourceTree = "<group>"; };
+		4F056B3D26B50EA300D13DEB /* Globe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globe.swift; sourceTree = "<group>"; };
 		4F6C435B258F044D00BCDBC5 /* GenshinLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenshinLoader.swift; sourceTree = "<group>"; };
 		4F8693E1257F9BC000F16592 /* playground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = playground.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F8693E4257F9BC000F16592 /* playgroundApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = playgroundApp.swift; sourceTree = "<group>"; };
@@ -41,12 +41,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4F2589312584E3970073CC0C /* todo */ = {
+		4F056B3C26B50E8700D13DEB /* globe */ = {
 			isa = PBXGroup;
 			children = (
-				4F2589322584E3C60073CC0C /* Strike.swift */,
+				4F056B3D26B50EA300D13DEB /* Globe.swift */,
 			);
-			path = todo;
+			path = globe;
 			sourceTree = "<group>";
 		};
 		4F6C435A258F043900BCDBC5 /* genshin */ = {
@@ -76,9 +76,9 @@
 		4F8693E3257F9BC000F16592 /* playground */ = {
 			isa = PBXGroup;
 			children = (
+				4F056B3C26B50E8700D13DEB /* globe */,
 				4F6C435A258F043900BCDBC5 /* genshin */,
 				4FA422B8258A120600BE2B41 /* swiftui */,
-				4F2589312584E3970073CC0C /* todo */,
 				4F8693F4257F9BE900F16592 /* parallax */,
 				4F8693E4257F9BC000F16592 /* playgroundApp.swift */,
 				4F8693E6257F9BC000F16592 /* ContentView.swift */,
@@ -185,8 +185,8 @@
 				4FA422BA258A121600BE2B41 /* ScrollOffsetView.swift in Sources */,
 				4F6C435C258F044D00BCDBC5 /* GenshinLoader.swift in Sources */,
 				4F8693E7257F9BC000F16592 /* ContentView.swift in Sources */,
+				4F056B3E26B50EA300D13DEB /* Globe.swift in Sources */,
 				4F8693F6257F9C0100F16592 /* ParallaxScroll.swift in Sources */,
-				4F2589332584E3C60073CC0C /* Strike.swift in Sources */,
 				4F8693E5257F9BC000F16592 /* playgroundApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

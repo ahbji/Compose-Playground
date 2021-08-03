@@ -21,7 +21,7 @@ object Versions {
 }
 
 object Libs {
-    const val androidGradlePlugin = "com.android.tools.build:gradle:7.0.0-rc01"
+    const val androidGradlePlugin = "com.android.tools.build:gradle:7.0.0"
 
     const val junit = "junit:junit:4.13"
 
@@ -69,7 +69,7 @@ object Libs {
 
         object Compose {
             const val snapshot = ""
-            const val version = "1.0.0-rc01"
+            const val version = "1.0.0"
 
             const val foundation = "androidx.compose.foundation:foundation:$version"
             const val layout = "androidx.compose.foundation:foundation-layout:$version"

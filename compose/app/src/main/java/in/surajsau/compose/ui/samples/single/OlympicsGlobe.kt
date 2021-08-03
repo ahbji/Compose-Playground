@@ -7,7 +7,6 @@ import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -67,27 +66,71 @@ private val WorldMap = listOf(
     /*-90 */"........................................................................",
 )
 
+private val OlympicLogo = listOf(
+    /* 90   "|...|...|...|...|...|...|...|...|...*...|...|...|...|...|...|...|...|...", */
+    /* 90 */"........................................................................",
+    /* 85 */"........................................................................",
+    /* 80 */"........................................................................",
+    /* 75 */"........................................................................",
+    /* 70 */"..............xx........................................................",
+    /* 65 */"..............xx........................................................",
+    /* 60 */"............x.xx.x.......................................................",
+    /* 55 */"...........xxx..xxx.....................................................",
+    /* 50 */"............x....x......................................................",
+    /* 45 */".............x..x.......................................................",
+    /* 40 */"............xxxxxx......................................................",
+    /* 35 */".............x..x.......................................................",
+    /* 30 */"........................................................................",
+    /* 25 */"........................................................................",
+    /* 20 */"........................................................................",
+    /* 15 */"........................................................................",
+    /* 10 */"...............................................xx..xx...................",
+    /*  5 */"...............................................xx..xx.x.................",
+    /*  0 */".................................................xx..xxx................",
+    /*-10 */"...............................................x.xx.x.x.................",
+    /*-15 */"..............................................xxx..xxx..................",
+    /*-20 */"...............................................x....x...................",
+    /*-25 */"................................................x..x....................",
+    /*-30 */"...............................................xxxxxx...................",
+    /*-35 */"................................................x..x....................",
+    /*-40 */"........................................................................",
+    /*-45 */"........................................................................",
+    /*-50 */"........................................................................",
+    /*-55 */"........................................................................",
+    /*-60 */"........................................................................",
+    /*-65 */"........................................................................",
+    /*-70 */"........................................................................",
+    /*-75 */"........................................................................",
+    /*-80 */"........................................................................",
+    /*-85 */"........................................................................",
+    /*-90 */"........................................................................",
+)
+
 @Composable
 fun OlympicsGlobeScreen() {
 
-    Column(modifier = Modifier.fillMaxSize()
-        .background(color = Color.Black)) {
+    Column(
+        modifier = Modifier.fillMaxSize()
+            .background(color = Color.Black)
+    ) {
 
-        OlympicsGlobe(modifier = Modifier
-            .fillMaxWidth()
-            .fillMaxHeight(0.5f)
-            .padding(16.dp),
-            dotColor = Color.White,
+        OlympicsGlobe(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(0.5f)
+                .padding(16.dp),
+            inclinationAngle = 5 * PI / 180,
+            pattern = WorldMap
         )
     }
 }
 
 @Composable
 fun OlympicsGlobe(
+    pattern: List<String> = WorldMap,
     inclinationAngle: Float = 0f,
     globeRadiusSize: Float = 0.7f,
     dotSize: Dp = 5.dp,
-    dotColor: Color = if (isSystemInDarkTheme()) Color.White else Color.Black,
     modifier: Modifier = Modifier
 ) {
     val infiniteTransition = rememberInfiniteTransition()
@@ -101,10 +144,10 @@ fun OlympicsGlobe(
     )
 
     val dotInfos = remember {
-        WorldMap.reversed().mapIndexed { i, str ->
+        pattern.reversed().mapIndexed { i, str ->
             str.reversed().toCharArray().mapIndexed { j, char ->
                 if (char == 'x')
-                    DotCoordinate(i * PI/36, j * PI/36)
+                    DotCoordinate(i * PI / 36, j * PI / 36)
                 else
                     InvalidCoordinate
             }
@@ -115,7 +158,7 @@ fun OlympicsGlobe(
 
         val minDimension = size.minDimension
 
-        val center = minDimension/2
+        val center = minDimension / 2
 
         val rotationZ = animatedProgress * TWO_PI
         dotInfos.forEach {
@@ -142,7 +185,7 @@ fun OlympicsGlobe(
                     projectedX * sin(inclinationAngle) + projectedY * cos(inclinationAngle)
 
                 drawCircle(
-                    color = if (scale > 0.65) dotColor else Color.Blue,
+                    color = if (scale > 0.65) Color.White else Color.Blue,
                     radius = dotSize.value * scale,
                     center = Offset(inclinedX + center, inclinedY + center),
                 )
@@ -153,5 +196,5 @@ fun OlympicsGlobe(
 
 sealed class Coordinate
 
-private data class DotCoordinate(val azimuthAngle: Float, val polarAngle: Float): Coordinate()
-private object InvalidCoordinate: Coordinate()
+private data class DotCoordinate(val azimuthAngle: Float, val polarAngle: Float) : Coordinate()
+private object InvalidCoordinate : Coordinate()

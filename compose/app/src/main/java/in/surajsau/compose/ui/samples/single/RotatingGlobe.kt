@@ -6,7 +6,6 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -32,12 +31,13 @@ fun RotatingGlobeScreen() {
 
     Column(modifier = Modifier.fillMaxSize()) {
 
-        RotatingGlobe(modifier = Modifier
-            .fillMaxWidth()
-            .fillMaxHeight(0.5f)
-            .padding(16.dp),
+        RotatingGlobe(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(0.5f)
+                .padding(16.dp),
             numberOfDots = 1000,
-            inclinationAngle = PI/3
+            inclinationAngle = PI / 3
         )
     }
 }
@@ -48,7 +48,6 @@ fun RotatingGlobe(
     globeRadiusSize: Float = 0.7f,
     numberOfDots: Int = 1000,
     dotSize: Dp = 5.dp,
-    dotColor: Color = if (isSystemInDarkTheme()) Color.White else Color.Black,
     modifier: Modifier = Modifier
 ) {
     val infiniteTransition = rememberInfiniteTransition()
@@ -63,9 +62,9 @@ fun RotatingGlobe(
 
     val dotInfos = remember {
         (0 until numberOfDots).map {
-                val azimuthAngle = acos((Math.random().toFloat() * 2) - 1)
-                val polarAngle = Math.random().toFloat() * TWO_PI
-                DotInfo(azimuthAngle, polarAngle)
+            val azimuthAngle = acos((Math.random().toFloat() * 2) - 1)
+            val polarAngle = Math.random().toFloat() * TWO_PI
+            AngularCoordinates(azimuthAngle, polarAngle)
         }
     }
 
@@ -73,7 +72,7 @@ fun RotatingGlobe(
 
         val minDimension = size.minDimension
 
-        val center = minDimension/2
+        val center = minDimension / 2
 
         val rotationY = animatedProgress * TWO_PI
         dotInfos.forEach {
@@ -99,7 +98,7 @@ fun RotatingGlobe(
                 projectedX * sin(inclinationAngle) + projectedY * cos(inclinationAngle)
 
             drawCircle(
-                color = dotColor,
+                color = Color.Black,
                 radius = dotSize.value * scale,
                 center = Offset(rotatedX + center, rotatedY + center),
             )
@@ -107,4 +106,4 @@ fun RotatingGlobe(
     }
 }
 
-private data class DotInfo(val azimuthAngle: Float, val polarAngle: Float)
+private data class AngularCoordinates(val azimuthAngle: Float, val polarAngle: Float)
