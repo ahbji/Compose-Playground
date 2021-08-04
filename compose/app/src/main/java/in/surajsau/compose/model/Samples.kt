@@ -6,6 +6,7 @@ import `in`.surajsau.compose.ui.samples.parallax.ParallaxScreen
 import `in`.surajsau.compose.ui.samples.single.FeedbackScreen
 import `in`.surajsau.compose.ui.samples.single.GoogleFontsAnimationScreen
 import `in`.surajsau.compose.ui.samples.single.OlympicsGlobeScreen
+import `in`.surajsau.compose.ui.samples.single.ReorderListScreen
 import `in`.surajsau.compose.ui.samples.single.RotatingGlobeScreen
 
 val Genshin = ScreenInformation(
@@ -57,7 +58,15 @@ val OlympicsGlobe = ScreenInformation(
     { OlympicsGlobeScreen() }
 )
 
+val ReorderList = ScreenInformation(
+    "Reorder List",
+    "--",
+    "--",
+    { ReorderListScreen() }
+)
+
 val Samples = listOf(
+    ReorderList,
     Genshin, NeomorphButton, ParallaxCards,
     GoogleFontAnimation, FeedbackSlider, RotatingGlobe,
     OlympicsGlobe
