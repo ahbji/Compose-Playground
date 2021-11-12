@@ -3,6 +3,7 @@ package `in`.surajsau.compose.model
 import `in`.surajsau.compose.ui.samples.genshin.GenshinScreen
 import `in`.surajsau.compose.ui.samples.neomorph.NeomorphScreen
 import `in`.surajsau.compose.ui.samples.parallax.ParallaxScreen
+import `in`.surajsau.compose.ui.samples.single.ExpandableTextScreen
 import `in`.surajsau.compose.ui.samples.single.FeedbackScreen
 import `in`.surajsau.compose.ui.samples.single.GoogleFontsAnimationScreen
 import `in`.surajsau.compose.ui.samples.single.OlympicsGlobeScreen
@@ -65,9 +66,16 @@ val ReorderList = ScreenInformation(
     { ReorderListScreen() }
 )
 
+val ExpandableText = ScreenInformation(
+    "Expandable Text",
+    "--",
+    "--",
+    { ExpandableTextScreen() }
+)
+
 val Samples = listOf(
     ReorderList,
     Genshin, NeomorphButton, ParallaxCards,
     GoogleFontAnimation, FeedbackSlider, RotatingGlobe,
-    OlympicsGlobe
+    OlympicsGlobe, ExpandableText
 )
