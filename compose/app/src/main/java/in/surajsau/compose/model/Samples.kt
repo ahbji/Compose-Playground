@@ -9,6 +9,7 @@ import `in`.surajsau.compose.ui.samples.single.GoogleFontsAnimationScreen
 import `in`.surajsau.compose.ui.samples.single.OlympicsGlobeScreen
 import `in`.surajsau.compose.ui.samples.single.ReorderListScreen
 import `in`.surajsau.compose.ui.samples.single.RotatingGlobeScreen
+import `in`.surajsau.compose.ui.samples.single.MagnifyImageScreen
 
 val Genshin = ScreenInformation(
     "Genshin Loading",
@@ -73,9 +74,16 @@ val ExpandableText = ScreenInformation(
     { ExpandableTextScreen() }
 )
 
+val Zoomable = ScreenInformation(
+    "Zoomable",
+    "--",
+    "--",
+    { MagnifyImageScreen() }
+)
+
 val Samples = listOf(
     ReorderList,
     Genshin, NeomorphButton, ParallaxCards,
     GoogleFontAnimation, FeedbackSlider, RotatingGlobe,
-    OlympicsGlobe, ExpandableText
+    OlympicsGlobe, ExpandableText, Zoomable
 )
