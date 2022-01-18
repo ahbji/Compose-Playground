@@ -10,6 +10,7 @@ import `in`.surajsau.compose.ui.samples.single.OlympicsGlobeScreen
 import `in`.surajsau.compose.ui.samples.single.ReorderListScreen
 import `in`.surajsau.compose.ui.samples.single.RotatingGlobeScreen
 import `in`.surajsau.compose.ui.samples.single.MagnifyImageScreen
+import `in`.surajsau.compose.ui.samples.single.ScrollableGraphScreen
 
 val Genshin = ScreenInformation(
     "Genshin Loading",
@@ -78,7 +79,7 @@ val Zoomable = ScreenInformation(
     "Zoomable",
     "--",
     "--",
-    { MagnifyImageScreen() }
+    { ScrollableGraphScreen() }
 )
 
 val Samples = listOf(

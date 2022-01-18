@@ -12,8 +12,6 @@ import androidx.navigation.compose.rememberNavController
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            AppContent()
-        }
+        setContent { AppContent() }
     }
 }
